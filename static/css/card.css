@@ -1,0 +1,153 @@
+.full-screen {
+    height: 100vw;
+    position: relative;
+}
+.title {
+    text-align: center;
+    font-weight: 100;
+}
+.divider {
+    border-bottom: 1px solid #23527c;
+}
+
+/*custome icon--start*/
+.cus-icon {
+    position: relative;
+    /*top: 1px;*/
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    float: left;
+    display: block;  This is required 
+/*    -webkit-transition: font-size 0.3s ease, left 0.3s ease;
+    transition: font-size 0.3s ease, left 0.3s ease;*/
+}
+
+.cus-icon.icon-rasp {
+    background: url('/static/img/raspberry_icon.png');
+    background-size: cover;
+}
+
+.cus-icon.normal {
+    width: 29px;
+    height: 32px;
+}
+
+.cus-icon.small {
+    width: 14px;
+    height: 16px;
+}
+
+.cus-icon.medium {
+    width: 60px;
+    height: 64px;
+}
+
+.cus-icon.large {
+    width: 120px;
+    height: 128px;
+}
+/*custome icon --end*/
+
+.cards {
+    background: #f2f2f2;
+    border-radius: 3px;
+    cursor: pointer;
+    height: 17em;
+    padding: 1.5em;
+    position: relative;
+    -webkit-transition: height 0.4s, box-shadow 0.5s;
+    transition: height 0.4s, box-shadow 0.5s;
+}
+.cards:hover {
+    box-shadow: 0 0 2em #999;
+    height: 25em;
+    -webkit-transition: height 0.3s ease, box-shadow 0.5s ease;
+    transition: height 0.3s ease, box-shadow 0.5s ease;
+}
+.cards:hover .divider {
+    opacity: 0.5;
+}
+.cards:hover .info {
+    -webkit-transition: top 0.5s ease, opacity 1s ease;
+    transition: top 0.5s ease, opacity 1s ease;
+    visibility: visible;
+    top: 1%;
+    opacity: 1;
+}
+
+.cards:hover .smalldate {
+    -webkit-transition: bottom 0.5s ease, opacity 1s ease;
+    transition: bottom 0.5s ease, opacity 1s ease;
+    visibility: visible;
+    bottom: 1%;
+    opacity: 1;
+}
+
+.cards:hover .icon {
+    font-size: 2em;
+    left: 45%;
+    -webkit-transition: font-size 0.3s, left 0.3s;
+    transition: font-size 0.3s, left 0.3s;
+}
+.cards .info {
+    position: relative;
+    visibility: hidden;
+    top: -50%;
+    opacity: 0;
+}
+
+.cards .btnflow {
+    position: absolute;
+    visibility: hidden;
+    bottom: -50%;
+    opacity: 0;
+}
+
+.cards .smalldate {
+    position: absolute;
+    right: 5%;
+    visibility: hidden;
+    bottom: -50%;
+    opacity: 0;
+}
+
+.cards .icon {
+    color: #23527c;
+    font-size: 4em;
+    text-align: center;
+    padding: 0em;
+    position: relative;
+    left: 43%;
+    top: 0em;
+    -webkit-transition: font-size 0.3s ease, left 0.3s ease;
+    transition: font-size 0.3s ease, left 0.3s ease;
+}
+.cards .title {
+    color: #999;
+    text-align: center;
+    font-weight: 300;
+}
+.cards .lead {
+    color: #999;
+    font-weight: 100;
+    text-align: left;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+.cards .btn {
+    color: #00c5a7;
+    border: 1px solid #00c5a7;
+    border-radius: 3px;
+    -webkit-transition: color 0.3s, background 0.3s;
+    transition: color 0.3s, background 0.3s;
+}
+.cards .btn:hover {
+    background: #00c5a7;
+    color: #fff;
+    -webkit-transition: background 0.5s ease;
+    transition: background 0.5s ease;
+}
