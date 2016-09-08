@@ -1,7 +1,7 @@
     $(document).ready(function() {
         var eid = $.url.param("eid");
         console.log("eid:" + eid);
-        var url = "http://localhost:5050/g"
+        var url = "http://140.138.77.152:5050/g"
         var data = "sub_path=history&eid=" + eid;
         getJSON(url, data);
 

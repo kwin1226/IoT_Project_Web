@@ -87,7 +87,7 @@ function callback_handler(sub_path, json){
 function getDetailpage(identifier){
   var eid = $(identifier).data('eid'); 
   console.log('eid:' + eid);
-  var url = "http://localhost:5050/detail?eid=" + eid;
+  var url = "http://140.138.77.152:5050/detail?eid=" + eid;
   window.location.href = url;
 
 }
