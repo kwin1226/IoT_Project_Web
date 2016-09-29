@@ -8,6 +8,14 @@ module.exports = {
       res.sendFile(path.join(__dirname+'/templates/index.html'));
     });
 
+    app.get('/register', function(req, res) { //detail page of the equipment
+      res.sendFile(path.join(__dirname+'/templates/register.html'));
+    });
+
+    app.get('/new', function(req, res) { //detail page of the equipment
+      res.sendFile(path.join(__dirname+'/templates/qrcode.html'));
+    });
+
     app.get('/detail', function(req, res) { //detail page of the equipment
       res.sendFile(path.join(__dirname+'/templates/RP_detail.html'));
     });
