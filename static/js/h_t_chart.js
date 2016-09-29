@@ -1,12 +1,14 @@
     $(document).ready(function() {
         var eid = $.url.param("eid");
+        var uid = $.url.param("uid");
         console.log("eid:" + eid);
-        var url = "http://140.138.77.152:5050/g"
-        var data = "sub_path=history&eid=" + eid;
-        getJSON(url, data);
+        var url = "http://localhost:5050/g"
+        var His_para = "sub_path=history&eid=" + eid;
+        var Equip_para = "sub_path=equips&eid=" + eid;
+        getHistoryJSON(url, His_para);
+        getEquipJSON(url, Equip_para);
 
         });
-
 
     function chart_rander(json){
 
@@ -201,13 +203,7 @@
     }
 
 
-    function getJSON(url, data){  //(url, data, dataArray)
-    // var sub_path ="";
-    // $.each(dataArray, function(i, field){
-    //     if(field.name == "sub_path"){
-    //         sub_path = field.value;
-    //     }
-    // });
+    function getHistoryJSON(url, data){  //(url, data, dataArray)
 
     $.ajax({
               url: url,
@@ -217,7 +213,8 @@
               success: function(json) { 
               $(".cards-contain").remove();
                 chart_rander(json);
-                console.log(JSON.stringify(json)) },
+                // console.log(JSON.stringify(json));
+                 },
               beforeSend: function(){
                 var loadingMask = `
                   <div class="cssload-thecube">
@@ -227,7 +224,7 @@
                   <div class="cssload-cube cssload-c3"></div>
                   </div>`;
 
-                $(loadingMask).insertAfter(".container-fluid");
+                $(loadingMask).insertAfter("#section1");
               },
               complete: function(){
                    $(".cssload-thecube").fadeOut();
@@ -235,4 +232,41 @@
                },
               error: function() { console.log("Error occur in requesting to " + url); }
             });
+}
+
+    function getEquipJSON(url, data){
+
+        $.ajax({
+                  url: url,
+                  type: 'GET',
+                  dataType: 'json',
+                  data: data,
+                  success: function(json) { 
+                    console.log(json);
+                    Equip_rander(json);
+                    // console.log(JSON.stringify(json)) 
+                },
+                // beforeSend: function(){
+                //   var loadingMask = `
+                //     <div class="cssload-thecube">
+                //     <div class="cssload-cube cssload-c1"></div>
+                //     <div class="cssload-cube cssload-c2"></div>
+                //     <div class="cssload-cube cssload-c4"></div>
+                //     <div class="cssload-cube cssload-c3"></div>
+                //     </div>`;
+
+                //   $(loadingMask).insertAfter("section.bg-3");
+                // },
+                // complete: function(){
+                //      $(".cssload-thecube").remove();
+
+                 // },
+                  error: function() { console.log("Error occur in requesting to " + url+ data); }
+                });
+    }
+
+
+    function Equip_rander(json){
+        var DOM_detail_data = `<h2 >`+ json[0].equipName +` <a> [`+ json[0].dirName +`]</a></h2>`;
+        $("#section1").prepend(DOM_detail_data);
 }

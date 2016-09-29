@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>PREtector Demo-Test</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link href="static/css/styles.css" rel="stylesheet">
+  <!-- vendor js file -->
+  <script src="static/vendor/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <script src="static/vendor/moment.min.js"></script>
+  <script src="static/vendor/daterangepicker.js"></script>
+  <script src="static/vendor/getPara.js"></script>
+  <script src="static/vendor/socket.io.js"></script>
+  <script src="/static/vendor/SIPml-api.js" type="text/javascript"> </script>
+  <!-- highcharts js file -->
+  <script src="https://code.highcharts.com/stock/highstock.js"></script>
+  <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+  <!-- local js file -->
+  <script src="/static/js/RP_h_t_chart.js"></script>
+  <script src="/static/js/RP_realtime_chart.js"></script>
+  <script src="/static/js/RP_VOIP.js"></script>
+
+
+</head>
+
+<body>
+<!-- Navbar -->
+<nav class="navbar">  <!-- navbar-default-->
+  <div class="container">
+    <div class="navbar-header">
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row-fuild">
+    <div class="row">
+      <div class="col-md-5" align="left">
+        <section id="section1">
+      <div>
+        <b><font size="5"><a>濕度 :<a id="rel_hum">0</a><a> %</a></a></font></b>
+      </div>
+      
+      <div>
+        <b><font size="5"><a>溫度 :<a id="rel_tem">0</a><a>°C</a></a></font></b>
+      </div>
+      
+       <div>
+        <b><font size="5"><a>使用時間 :<a id="rel_ustime">00:00:00</a><a> (min)</a></a></font></b>
+      </div>
+      
+       <div >
+        <b><font size="5"><a>開通日期 :<a id="rel_acttime"> </a></a></font></b>
+      </div>
+      </section>
+    </div>
+      <div class="col-md-2">
+      <button id="makeCall" type="button" class="btn btn-danger pretector-button-voip">緊急通話<br><span style="font-size:10px;"></span></button>
+      <button id="hangupCall" type="button" class="btn btn-danger pretector-button-voip" >結束通話<br><span style="font-size:10px;"></span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ 
+
+ <hr color="#000000" size="8px">
+<!-- <div class="embed-responsive embed-responsive-4by3">
+  <iframe class="embed-responsive-item" src="http://140.138.77.152/phoneRTC/call.htm?svn=230"></iframe>
+</div> -->
+
+
+<!-- <div class ="row">
+  <div class="col-xs-6">
+    <b><font size="5" face="新細明體" align="center"><a>濕度:<a id="rel_hum2">0</a><a>%</a></a></font></b>
+  </div>
+  <div class="col-xs-6">
+    <b><font size="5" face="新細明體" align="center"><a>溫度:<a id="rel_tem2">0</a><a>°C</a></a></font></b>
+  </div>
+</div> -->
+
+<div class="row" >
+<div class="col-sm-6">
+<div id="humIntime" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</div>
+<div class="col-sm-6">
+<div id="temIntime" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</div>
+</div>
+
+<!-- <div class="col-xs-6">
+    <a>溫度:<a id="rel_tem">321</a><a>°C</a>></a>
+  </div> -->
+<!-- <div class="col-sm-6"> -->
+<div id="usetime" style="min-width: 310px; height: 200px; margin: 0 auto"></div>
+
+  
+<!-- </div> -->
+<!-- <h2>Initial Data</h2>
+<pre id='complete-data'></pre><br/>
+<h2>Data Updates</h2>
+<pre id='updated-data'></pre> -->
+
+<div class="row p-b-5" >
+  <div class="col-sm-6">
+    <div id="h_pie" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+  </div>
+  <div class="col-xs-6">
+    <div id="t_pie" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+  </div>
+</div>
+<div id="h_t_chart" style="min-width: 310px; height: 450px; margin: 0 auto"></div>
+<div id="time-History"  style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
+<label style="width: 100%;" align="center" id="txtRegStatus"></label>
+<label style="width: 100%;" align="center" id="txtCallStatus"></label><br>
+<!-- <button id="makeCall" type="button">Call</button> -->
+<!-- <button id="acceptCall" type="button">Accept</button> -->
+<!-- <button id="hangupCall" type="button">Hangup</button> -->
+<!-- <button id="unregister" type="button">Unregister</button> -->
+<audio id="audio-remote" autoplay="autoplay"> </audio>
+<audio id="ringtone" loop src="/static/sounds/ringtone.wav"> </audio>
+<audio id="ringbacktone" loop src="/static/sounds/ringbacktone.wav"> </audio>
+<audio id="dtmfTone" src="/static/sounds/dtmf.wav"> </audio>
+<video class="video" width="100%" height="100%" id="video-remote" autoplay="autoplay" style="opacity: 0;
+    background-color: #000000; -webkit-transition-property: opacity; -webkit-transition-duration: 2s;"></video>
+
+
+
+<!-- Footer -->
+<footer class="container-fluid bg-4 text-center">
+
+</footer>
+
+</body>
+</html>
+

@@ -6,27 +6,28 @@ var https = require("https");
  * @param options: http options object
  * @param callback: callback to pass the results JSON object(s) back
  */
-exports.getJSON = function(options, onResult)
+exports.getJSON = function(options, onResult, post_data)
 {
-    console.log("rest::getJSON");
+    // console.log("rest::getJSON");
 
     var prot = options.port == 443 ? https : http;
     var req = prot.request(options, function(res)
     {
         var output = '';
-        console.log(options.host + ':' + res.statusCode);
+        // console.log(options.host + ':' + res.statusCode);
         res.setEncoding('utf8');
 
         res.on('data', function (chunk) {
             output += chunk;
         });
-
         res.on('end', function() {
             var obj = JSON.parse(output);
             onResult(res.statusCode, obj);
         });
     });
-
+    if(options.method == "POST"){ //handle post form into req.body
+        req.write(post_data);
+    }
     req.on('error', function(err) {
         //res.send('error: ' + err.message);
     });

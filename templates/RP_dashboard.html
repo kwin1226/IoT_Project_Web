@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PREtector Demo-dashboard</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" >
+    <!-- <link href="http://www.w3schools.com/lib/w3.css" rel="stylesheet" > -->
+    
+	<!-- <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> -->
+	<link href="static/css/styles.css" rel="stylesheet">
+	<!-- cus css -->
+	<!-- <link href="static/css/card.css" rel="stylesheet"> -->
+  <!-- <link href="static/css/styles.css" rel="stylesheet"> -->
+  <link href="static/css/bootstrap4-cards.css" rel="stylesheet">
+	<link href="static/css/simple-sidebar.css" rel="stylesheet">
+  <link href="static/css/hover.css" rel="stylesheet" media="all">
+    <!-- custome css -->
+  <link href="static/css/ajaxLoading.css" rel="stylesheet">
+	<!-- static js -->
+	<script src="static/vendor/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script src="static/vendor/moment.min.js"></script>
+	<script src="static/vendor/daterangepicker.js"></script>
+	<script src="static/vendor/getPara.js"></script>
+  <script src="static/vendor/socket.io.js"></script>
+	<!-- local js file -->
+	<script src="static/js/RP_dashboard.js"></script>
+</head>
+<body>
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand" data-uid="0">
+                <a href="#">
+                    桃園隸屬醫院
+                </a>
+            </li>
+            <li class="sidebar-alert">
+                <a href="#" onclick="getAlertEquiptBt()" class="hvr-border-fade">
+                    危險事件警示
+                </a>
+            </li>
+            <li class="sidebar-normal">
+                <a href="#" onclick="getUsingEquiptBt()" class="hvr-border-fade">
+                    使用中
+                </a>
+            </li>
+            <li class="sidebar-none">
+                <a href="#" onclick="getAllEquipBt()" class="hvr-border-fade">
+                    桃園隸屬醫院 總覽
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-1">
+                    
+                    <button type="button" id="menu-toggle" class="btn btn-default" aria-label="Left Align">
+                      <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="col-lg-5">
+                    <h4 id="dashboard_time"></h4>
+                </div>
+                <div class="col-lg-4">
+                <!-- /input-group -->
+                   <div class="input-group"> 
+                     <input id="search_keyword" type="text" class="form-control" placeholder="Search for...">
+                     <span class="input-group-btn">
+                       <button id="search_bt" class="btn btn-default" type="button">Go!</button>
+                     </span>
+                   </div>
+                <!-- /input-group -->
+                </div>
+                <div class="col-lg-2">
+                <button type="button" id="dashboard_logout" class="btn btn-default" aria-label="Left Align">登出</button>
+                </div>
+            </div>
+            <hr style="margin-top:1%;">
+            <!-- <div class="row"></div> -->
+            <div id="card-container">
+                <section class="block-padding">
+                  <div class="row section-bg">
+                    <div class="col-lg-12 text-center">
+                        <h4>一館</h4>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card card-header-alert l-h-200">
+                          <div class="card-block" >
+                          <div class="col-xs-12 text-center pretector-text-title">
+                            <strong>集賢樓202-A</strong>
+                          </div>
+                            <blockquote class="card-blockquote">
+                            <div class="col-xs-2 no-padding"><img src="/static/img/icon-tmp.png" class="icon-sensors"></div>
+                            <div class="col-xs-6 text-right">40°C</div>
+                            <div class="col-xs-4 no-padding text-right"><img src="/static/img/icon-warn.png" class="icon-sensors"></div>
+                            <div class="col-xs-2 no-padding"><img src="/static/img/icon-hum.png" class="icon-sensors"></div>
+                            <div class="col-xs-6 text-right">49%</div>
+                           <div class="col-xs-4 no-padding text-right"><img src="/static/img/icon-warn.png" class="icon-sensors"></div>
+                            <div class="col-xs-2 no-padding"><img src="/static/img/icon-time.png" class="icon-sensors"></div>
+                            <div class="col-xs-6 text-right">30mins</div>
+                            <div class="col-xs-4 no-padding text-right"><img src="/static/img/icon-warn.png" class="icon-sensors"></div>
+                            <div class="col-xs-2 no-padding"><img src="/static/img/icon-fall.png" class="icon-sensors"></div>
+                            <div class="col-xs-6 text-right">無</div>
+                            <div class="col-xs-4">&nbsp;</div>
+                            <div class="text-center l-h-300">
+                            <a href="#" class="btn btn-default text-red" >緊急通話</a>
+                            </div>
+                           
+                             <!--  <div class="col-xs-6">
+                              <img src="/static/img/icondash-10.png" class="img-fluid bg-sensors" alt="Responsive image" >
+                              <p><span class="pretector-text-tem">12%</span></p>
+                              </div>
+                              <div class="col-xs-6">
+                              <img src="/static/img/icondash-09.png" class="img-fluid bg-sensors " alt="Responsive image">
+                              <p><span class="pretector-text-hum">28°C</span></p>
+                              </div>
+                              <div class="col-xs-6">
+                              <img src="/static/img/icondash-11.png" class="img-fluid bg-sensors" alt="Responsive image">
+                              <p><span class="pretector-text-utime1">10</span><span class="pretector-text-utime2">mins</span></p>
+                              </div>
+                              <div class="col-xs-6">
+                              <img src="/static/img/icondash-17.png" class="img-fluid bg-sensors" alt="Responsive image">
+                              </div> -->
+                            </blockquote>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card card-header-normal l-h-200">
+                          <div class="card-block">
+                          <div class="col-xs-12 text-center pretector-text-title">
+                            <strong>103-2</strong>
+                          </div>
+                            <blockquote class="card-blockquote">
+                            <div class="col-xs-12">&nbsp;</div>
+                            <div class="col-xs-12">&nbsp;</div>
+                            <div class="col-xs-12 text-center">目前正常使用中</div>
+                            <div class="col-xs-12">&nbsp;</div>
+                            <div class="l-h-300">
+                            <div class="col-xs-12">&nbsp;</div>
+                            </div>
+                            </blockquote>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card card-text-none l-h-200">
+                          <div class="card-block">
+                          <div class="col-xs-12 text-center pretector-text-title">
+                            <strong>103-3</strong>
+                          </div>
+                            <blockquote class="card-blockquote">
+                            <div class="col-xs-12">&nbsp;</div>
+                            <div class="col-xs-12">&nbsp;</div>
+                            <div class="col-xs-12 text-center">目前無人使用</div>
+                            <div class="col-xs-12">&nbsp;</div>
+                            <div class="l-h-300">
+                            <div class="col-xs-12">&nbsp;</div>
+                            </div>
+                            </blockquote>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card card-text-none l-h-200">
+                          <div class="card-block">
+                          <div class="col-xs-12 text-center pretector-text-title">
+                            <strong>103-3</strong>
+                          </div>
+                            <blockquote class="card-blockquote">
+                            <div class="col-xs-12">&nbsp;</div>
+                            <div class="col-xs-12">&nbsp;</div>
+                            <div class="col-xs-12 text-center">目前無人使用</div>
+                            <div class="col-xs-12">&nbsp;</div>
+                            <div class="l-h-300">
+                            <div class="col-xs-12">&nbsp;</div>
+                            </div>
+                            </blockquote>
+                          </div>
+                        </div>
+                    </div>
+<!--                     <div class="col-lg-3" align="center">
+                        <div class="card">
+                          <div class="card-header text-center">
+                            <strong>103-3</strong>
+                          </div>
+                          <div class="card-block">
+                            <blockquote class="card-blockquote">
+                             <div class="col-xs-7">溫度</div>
+                             <div class="col-xs-1"></div>
+                             <div class="col-xs-4" style="color: red">40°C</div>
+                             <div class="col-xs-7">濕度</div>
+                             <div class="col-xs-1"></div>
+                             <div class="col-xs-4">47%</div>
+                             <div class="col-xs-7">使用時間</div>
+                             <div class="col-xs-1"></div>
+                             <div class="col-xs-4"25mins</div>
+                             <div class="col-xs-7">跌倒事件</div>
+                             <div class="col-xs-1"></div>
+                             <div class="col-xs-4">無</div>
+                            </blockquote>
+                          </div>
+                        </div>
+                    </div> -->
+<!--                     <div class="col-lg-3">
+                        <div class="card card-border-normal">
+                          <div class="card-header card-header-alert card-border-normal text-center">
+                            <strong>103-2</strong>
+                          </div>
+                          <div class="card-block">
+                            <blockquote class="card-blockquote">
+                              <div class="col-xs-7">溫度</div>
+                              <div class="col-xs-1"></div>
+                              <div class="col-xs-4">35°C</div>
+                              <div class="col-xs-7">濕度</div>
+                              <div class="col-xs-1"></div>
+                              <div class="col-xs-4">45%</div>
+                              <div class="col-xs-7">使用時間</div>
+                              <div class="col-xs-1"></div>
+                              <div class="col-xs-4"20mins</div>
+                              <div class="col-xs-7">跌倒事件</div>
+                              <div class="col-xs-1"></div>
+                              <div class="col-xs-4">無</div>
+                            </blockquote>
+                          </div>
+                        </div>
+                    </div> -->
+                </div>
+            </section>
+
+            <section class="block-padding">
+                  <div class="row section-bg">
+                    <div class="col-lg-12 text-center">
+                        <h4>二館</h4>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card card-header-normal l-h-200">
+                          <div class="card-block">
+                          <div class="col-xs-12 text-center pretector-text-title">
+                            <strong>203-1</strong>
+                          </div>
+                            <blockquote class="card-blockquote">
+                            <div class="col-xs-12">&nbsp;</div>
+                            <div class="col-xs-12">&nbsp;</div>
+                            <div class="col-xs-12 text-center">目前正常使用中</div>
+                            <div class="col-xs-12">&nbsp;</div>
+                            <div class="l-h-300">
+                            <div class="col-xs-12">&nbsp;</div>
+                            </div>
+                            </blockquote>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card card-header-normal l-h-200">
+                          <div class="card-block">
+                          <div class="col-xs-12 text-center pretector-text-title">
+                            <strong>203-2</strong>
+                          </div>
+                            <blockquote class="card-blockquote">
+                            <div class="col-xs-12">&nbsp;</div>
+                            <div class="col-xs-12">&nbsp;</div>
+                            <div class="col-xs-12 text-center">目前正常使用中</div>
+                            <div class="col-xs-12">&nbsp;</div>
+                            <div class="l-h-300">
+                            <div class="col-xs-12">&nbsp;</div>
+                            </div>
+                            </blockquote>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card card-text-none l-h-200">
+                          <div class="card-block">
+                          <div class="col-xs-12 text-center pretector-text-title">
+                            <strong>203-3</strong>
+                          </div>
+                            <blockquote class="card-blockquote">
+                            <div class="col-xs-12">&nbsp;</div>
+                            <div class="col-xs-12">&nbsp;</div>
+                            <div class="col-xs-12 text-center">目前無人使用</div>
+                            <div class="col-xs-12">&nbsp;</div>
+                            <div class="l-h-300">
+                            <div class="col-xs-12">&nbsp;</div>
+                            </div>
+                            </blockquote>
+                          </div>
+                        </div>
+                    </div>
+<!--                     <div class="col-lg-3" >
+                        <div class="card">
+                          <div class="card-header text-center">
+                            <strong>103-3</strong>
+                          </div>
+                          <div class="card-block">
+                            <blockquote class="card-blockquote">
+                             <div class="col-xs-7">溫度</div>
+                             <div class="col-xs-1"></div>
+                             <div class="col-xs-4" style="color: red">40°C</div>
+                             <div class="col-xs-7">濕度</div>
+                             <div class="col-xs-1"></div>
+                             <div class="col-xs-4">47%</div>
+                             <div class="col-xs-7">使用時間</div>
+                             <div class="col-xs-1"></div>
+                             <div class="col-xs-4"25mins</div>
+                             <div class="col-xs-7">跌倒事件</div>
+                             <div class="col-xs-1"></div>
+                             <div class="col-xs-4">無</div>
+                            </blockquote>
+                          </div>
+                        </div>
+                    </div> -->
+<!--                     <div class="col-lg-3">
+                        <div class="card card-border-normal">
+                          <div class="card-header card-header-alert card-border-normal text-center">
+                            <strong>103-2</strong>
+                          </div>
+                          <div class="card-block">
+                            <blockquote class="card-blockquote">
+                              <div class="col-xs-7">溫度</div>
+                              <div class="col-xs-1"></div>
+                              <div class="col-xs-4">35°C</div>
+                              <div class="col-xs-7">濕度</div>
+                              <div class="col-xs-1"></div>
+                              <div class="col-xs-4">45%</div>
+                              <div class="col-xs-7">使用時間</div>
+                              <div class="col-xs-1"></div>
+                              <div class="col-xs-4"20mins</div>
+                              <div class="col-xs-7">跌倒事件</div>
+                              <div class="col-xs-1"></div>
+                              <div class="col-xs-4">無</div>
+                            </blockquote>
+                          </div>
+                        </div>
+                    </div> -->
+                </div>
+            </section>
+
+
+          </div>
+        </div>
+        <div class="container">
+          <div class="modal fade" id="AddDirModal" role="dialog">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-header bg-normal">
+                  <a class="close" data-dismiss="modal">&times;</a>
+                  <h4 class="modal-title">新增標籤</h4>
+                </div>
+                <div class="modal-body">
+
+                <form id="form_newdir" method='POST' name="form_newdir" >
+                    <div class="form-group">
+                      <a for="email">名稱:</a>
+                      <input type="text" class="form-control" id="dirName" name="dirName" placeholder="Create new tag...">
+                      <a class ="alert-empty small" style="color:red;display:none;">請填入字元</a>
+                    </div>
+                </form>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button id="modal_login" type="button" class="btn btn-primary" data-dismiss="modal" onclick="postNewDir()">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+</body>
+</html>

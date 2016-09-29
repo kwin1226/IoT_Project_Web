@@ -9,16 +9,19 @@
   <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <link href="static/css/styles.css" rel="stylesheet">
   <link href="static/css/card.css" rel="stylesheet">
+  <!-- vendor js file -->
   <script src="static/vendor/jquery.min.js"></script>
   <script src="static/vendor/bootstrap.min.js"></script>
   <script src="static/vendor/moment.min.js"></script>
   <script src="static/vendor/daterangepicker.js"></script>
   <script src="static/vendor/getPara.js"></script>
-  <!-- high chart js file -->
-  <script src="http://code.highcharts.com/highcharts.js"></script>
-  <script src="http://code.highcharts.com/modules/exporting.js"></script>
+  <script src="static/vendor/socket.io.js"></script>
+  <!-- highcharts js file -->
+  <script src="https://code.highcharts.com/stock/highstock.js"></script>
+  <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
   <!-- local js file -->
   <script src="/static/js/h_t_chart.js"></script>
+  <script src="/static/js/realtime_chart.js"></script>
 
 </head>
 
@@ -32,66 +35,52 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand fade-in" href="http://140.138.77.152:5050/">PREtector<a class = "navbar-brand fade-in-loop" href="http://140.138.77.152:5050/">_</a></a>
+      <a class="navbar-brand fade-in" href="http://localhost:5050/">PREtector<a class = "navbar-brand fade-in-loop" href="http://localhost:5050/">_</a></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a id="bt_login" href="#">Login</a></li>
-<!--         <li><a href="#">WHAT</a></li>
-        <li><a href="#">WHERE</a></li> -->
+
       </ul>
     </div>
   </div>
 </nav>
-<section class="container-fluid bg-3">
-  <!-- <h3 class="margin">Hellow World</h3><br> -->
 
+<section  id="section1" class="container-fluid bg-3">
+  <hr>
 </section>
 
+<!-- <div class="embed-responsive embed-responsive-4by3">
+  <iframe class="embed-responsive-item" src="http://140.138.77.152/phoneRTC/call.htm?svn=230"></iframe>
+</div> -->
+<div class ="row">
+  <div class="col-sm-6">
+    <a>濕度:<a id="rel_hum">123</a></a>
+  </div>
+  <div class="col-xs-6">
+    <a>溫度:<a id="rel_tem">321</a></a>
+  </div>
+</div>
+
+<div id="hchart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<!-- <h2>Initial Data</h2>
+<pre id='complete-data'></pre><br/>
+<h2>Data Updates</h2>
+<pre id='updated-data'></pre> -->
+
 <div class="row" >
- <div class="col-sm-6">
-  <div id="h_pie" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
- </div>
-<div class="col-xs-6">
-  <div id="t_pie" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
- </div>
+  <div class="col-sm-6">
+    <div id="h_pie" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+  </div>
+  <div class="col-xs-6">
+    <div id="t_pie" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+  </div>
 </div>
 <div id="h_t_chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
 
-<!-- Third Container (Grid) -->
 
 
-<div class="container">
-  <div class="modal fade" id="LoginModal" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      <!--   <div class="modal-header alert-info">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Login</h4>
-        </div> -->
-        <div class="modal-body">
-        <form id="form_login" action=""  name="form_login" >
-            <div class="form-group">
-              <a for="email">Email:</a>
-              <input type="email" class="form-control" id="uid" name="uid" placeholder="Enter email">
-              <input class="form-control" id="sub_path" name="sub_path" value="register" style="display: none;">
-            </div>
-            <div class="form-group">
-              <a for="pwd">Password:</a>
-              <input type="password" class="form-control" id="pwd"  name="pwd" placeholder="Enter password">
-            </div>
-        </form>
 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button id="modal_login" type="button" class="btn btn-primary" data-dismiss="modal" onclick="getJSON('http://140.138.77.152:5050/g', $('#form_login').serialize(),$('#form_login').serializeArray())">Submit</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- Footer -->
 <footer class="container-fluid bg-4 text-center">
