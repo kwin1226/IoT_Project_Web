@@ -37,6 +37,21 @@ switch(method){
         };
     break;
     }
+    case 'PUT':
+    {
+        options = {
+            host: '140.138.77.152',
+            port: 5000,
+            path: sub_path,
+            method: method,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Length': Buffer.byteLength(post_data),
+                'Authorization': auth
+            }
+        };
+    break;
+    }
 }
 console.log("options > " + JSON.stringify(options));
 try {

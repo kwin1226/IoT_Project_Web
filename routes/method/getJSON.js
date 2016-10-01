@@ -27,6 +27,8 @@ exports.getJSON = function(options, onResult, post_data)
     });
     if(options.method == "POST"){ //handle post form into req.body
         req.write(post_data);
+    }else if(options.method == "PUT"){ //handle put form into req.body
+        req.write(post_data);
     }
     req.on('error', function(err) {
         //res.send('error: ' + err.message);

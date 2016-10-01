@@ -13,7 +13,11 @@ module.exports = {
     });
 
     app.get('/new', function(req, res) { //detail page of the equipment
-      res.sendFile(path.join(__dirname+'/templates/qrcode.html'));
+      res.sendFile(path.join(__dirname+'/templates/qrcode_login.html'));
+    });
+
+    app.get('/qrcode_form', function(req, res) { //detail page of the equipment
+      res.sendFile(path.join(__dirname+'/templates/qrcode_form.html'));
     });
 
     app.get('/detail', function(req, res) { //detail page of the equipment
@@ -25,12 +29,16 @@ module.exports = {
     });
 
     app.get('/g', function(req, res) { //make a HTTP GET request to API 
-      console.log("req:" + req.url);
+      console.log("req.body:" + req.url);
     	rest.getJSON(req,res);
     });
     app.post('/g', function(req, res) { //make a HTTP POST request to API 
-      console.log("req:" + req.body);
+      console.log("req.body:" + req.body);
       rest.postJSON(req,res);
+    });
+    app.put('/g', function(req, res) { //make a HTTP POST request to API 
+      console.log("req.body:" + req.body);
+      rest.putJSON(req,res);
     });
 
   } catch (err) {

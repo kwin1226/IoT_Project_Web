@@ -92,11 +92,11 @@ function postNewDir(){
 	              dataType: 'json',
 	              data: data,
 	              success: function(json) {
-	              console.log(JSON.stringify(json)); 
+	              // console.log(JSON.stringify(json)); 
 	              handlGetRequest();
 	              
 	            },
-	              error: function() { console.log("Error occur in requesting to " + url+ data); }
+	              error: function() { console.log("Error occur in requesting to /g" + data); }
 	            });
 	 }else{
 	 	alert("請填入字元");
@@ -236,7 +236,7 @@ function Dir_rander(json){
                            `" onClick="getEquipBt(this)"><span class="img-normal"></span>`+ data.dirName +`</a></li>`;
     });
     DOM += `<li class="sidebar-none">
-    		    <a href="#" onclick="getUnusingEquiptBt()" class="hvr-border-fade">
+    		    <a href="#" onclick="getUnusingEquiptBt()" class="hvr-border-fade newdata">
     		        未分類
     		    </a>
     		</li>
@@ -697,7 +697,6 @@ function isParamNull(id){
 function hasValue(obj, key, value) {
     return obj.hasOwnProperty(key) && obj[key] === value;
 }
-
 
 function sleep(milliseconds) {
   var start = new Date().getTime();

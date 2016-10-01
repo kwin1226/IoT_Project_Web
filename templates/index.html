@@ -18,30 +18,35 @@
 
 <body>
 
-  <div class="col-md-2 col-md-offset-5 text-center p-t-10">
-  <img class="img-home img-middle" src="/static/img/pretector_logo.png"></img>
+  <div class="col-md-2 col-md-offset-5 text-center p-t-10 fadeInAnimate">
+  <a href="/"><img class="img-home img-middle drop-shadow" src="/static/img/pretector_logo.png"></img></a>
   <img class="img-home p-b-10" src="/static/img/index_brand.png"></img>
-  <div class="input-group p-b-5">
-    <input type="text" class="form-control" placeholder="名稱">
+  <div class="input-group p-b-5 ">
+    <input type="text" id="user_name" name="user_name" class="form-control" placeholder="名稱" form="form_login">
     <div class="input-group-btn">
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
         <span class="caret"></span>
         <span class="sr-only">Toggle Dropdown</span>
       </button>
       <ul class="dropdown-menu dropdown-menu-right" role="menu">
-        <li><a id="hospitalLogin" href="#">Taoyuan General Hospital (桃園隸屬醫院)</a></li>
-        <li><a id="homeLogin" href="#">Taoyuan Jen-l Senior Citizen's Home (桃園仁愛之家)</a></li>
       </ul>
     </div>
   </div>
   <div class="input-group p-b-10 full-width">
-    <input type="password" class="form-control" placeholder="密碼">
+    <input type="password" id="user_pass" name="user_pass" class="form-control" placeholder="密碼" form="form_login">
   </div>
-   <button type="button" class="btn btn-primary btn-block login-bt">登入</button>
-   <button type="button" class="btn btn-block register-bt">註冊</button>
+  <div class="alert alert-danger alert-dismissible" id="alert-panel" role="alert" style="display: none;">
+    <button type="button" class="close" onclick="$('#alert-panel').slideUp();">×</button>
   </div>
-
-
+<!--   <div class="alert alert-danger" id="alert-panel">
+    <button type="button" class="close" onclick="$('#alert-panel').slideUp();">×</button>
+    <div class="alert-body" id="alert-panel-body"></div>
+  </div> -->
+  <form id="form_login" name="form_login" action="javascript:loginEvent('dashboard');" class="p-b-5">
+    <input type="submit" class="btn btn-primary btn-block login-bt " value="登入">
+  </form>
+   <a type="button" class="btn btn-block register-bt" href="/register">註冊</a>
+  </div>
 
 </body>
 </html>

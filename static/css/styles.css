@@ -49,6 +49,9 @@ body{
 .p-t-15 {
   padding-top: 15% !important;
 }
+.p-t-20 {
+  padding-top: 20% !important;
+}
 .p-t-30 {
   padding-top: 30% !important;
 }
@@ -110,7 +113,7 @@ body{
 
 .pretector-text-title {
   padding-bottom: 5%;
-  font-size: 25px;
+  font-size: 23px;
 }
 
 .pretector-text-none {
@@ -147,6 +150,47 @@ input {
 .full-width{
   width: 100%;
 }
+.fadeInAnimate{
+  animation: fadein 2s;
+  -moz-animation: fadein 2s; /* Firefox */
+  -webkit-animation: fadein 2s; /* Safari and Chrome */
+  -o-animation: fadein 2s; /* Opera */
+}
+
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
 /*.pretector-text-tem { 
   position: absolute;
   left: 38px;
@@ -176,3 +220,73 @@ input {
   width: 66px;
   word-wrap: break-word;
 }*/
+
+
+/*shadow animate*/
+
+.drop-shadow{
+    -webkit-filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0));
+    filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0));
+    -webkit-transition: -webkit-filter 0.3s ease-in-out;
+    transition: filter 0.2s ease-in-out;
+}
+
+.drop-shadow:hover{
+    -webkit-filter: drop-shadow(10px 13px 7px rgba(0, 0, 0, 0.7));
+    filter: drop-shadow(0px 8px 4px rgba(0, 0, 0, 0.7))
+}
+
+
+/*check mark animate*/
+@import "bourbon";
+
+.checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: #7ac142;
+  fill: none;
+  animation: stroke .6s cubic-bezier(0.650, 0.000, 0.450, 1.000) forwards;
+}
+
+.checkmark {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 2;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  margin: 20% 0px 0px 25%;
+  box-shadow: inset 0px 0px 0px #7ac142;
+  animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+}
+
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke .3s cubic-bezier(0.650, 0.000, 0.450, 1.000) .8s forwards;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scale {
+  0%, 100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #7ac142;
+  }
+}

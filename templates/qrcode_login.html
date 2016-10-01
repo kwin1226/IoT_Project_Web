@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" class="pretector-home-background">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>PREtector Demo-Test</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" >
+  <link href="static/css/styles.css" rel="stylesheet">
+  <script src="static/vendor/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <script src="static/vendor/moment.min.js"></script>
+  <script src="static/vendor/daterangepicker.js"></script>
+  <script src="static/vendor/getPara.js"></script>
+  <!-- local js file -->
+</head>
+
+<body>
+
+  <div class="col-md-2 col-md-offset-5 text-center p-t-10 fadeInAnimate">
+  <a href="/"><img class="img-home img-middle drop-shadow" src="/static/img/pretector_logo.png"></img></a>
+  <img class="img-home p-b-10" src="/static/img/index_brand.png"></img>
+  <div class="input-group p-b-5 ">
+    <input type="text" id="user_name" name="user_name" class="form-control" placeholder="名稱" form="form_login">
+    <div class="input-group-btn">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-right" role="menu">
+      </ul>
+    </div>
+  </div>
+  <div class="input-group p-b-10 full-width">
+    <input type="password" id="user_pass" name="user_pass" class="form-control" placeholder="密碼" form="form_login">
+  </div>
+  <div class="alert alert-danger alert-dismissible" id="alert-panel" role="alert" style="display: none;">
+    <button type="button" class="close" onclick="$('#alert-panel').slideUp();">×</button>
+  </div>
+<!--   <div class="alert alert-danger" id="alert-panel">
+    <button type="button" class="close" onclick="$('#alert-panel').slideUp();">×</button>
+    <div class="alert-body" id="alert-panel-body"></div>
+  </div> -->
+  <form id="form_login" name="form_login" action="javascript:loginEvent('dashboard');" class="p-b-5">
+    <input type="submit" class="btn btn-primary btn-block login-bt " value="登入">
+  </form>
+   <a type="button" class="btn btn-block register-bt" href="/register">註冊</a>
+  </div>
+
+
+
+
+<script>
+  
+$(function(){
+  buttonInit();
+  register();
+});
+
+function buttonInit(){
+  $("#hospitalLogin, #homeLogin").on('click', function(e){
+    e.preventDefault();
+    let url = "/dashboard?uid=1";
+    window.location.href = url;
+  });
+}
+
+function register(){
+  var data = "sub_path=user";
+   $.ajax({
+            url: '/g',
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            success: function(json) {
+            // console.log(JSON.stringify(json)); 
+            getUserList(json);
+          },
+            error: function() { console.log("Error occur in requesting to /g \ndata:" + data); }
+          });
+}
+
+function getUserList(json){
+  var DOM ="";
+  $.each(json, function(index, data){
+    DOM += `<li><a href="#" data-uid="`+ data.uid +`" onclick="selectEvent(this,event)">`+ data.username +`</a></li>`;
+  });
+  $(".dropdown-menu").append(DOM);
+}
+
+function selectEvent(identifier,e){
+  e.preventDefault();
+  $("#user_name").val($(identifier).text());
+}
+
+function loginEvent(){
+  var data = $('#form_login').serialize();
+  // console.log(data);
+  if(checkformEmpty())return;
+  data += "&sub_path=userlogin";
+   $.ajax({
+            url: '/g',
+            type: 'POST',
+            dataType: 'json',
+            data: data,
+            success: function(json) {
+            console.log(JSON.stringify(json)); 
+            loginCallback(json);
+          },
+            error: function() { console.log("Error occur in requesting to /g" + data); }
+          });
+}
+
+function checkformEmpty(){
+  var flag = false;
+  var pattern = new RegExp("[`=|{}':;',\\[\\]<>/?~！￥……&*（）&;|{}【】‘；：”“'。，、？\"]");
+  $("input").each(function() {
+     if($(this).val() === ""){
+      var DOM = "<strong>有人留空白囉!</strong>";
+      $("#alert-panel").find("strong").remove();
+      $("#alert-panel").append(DOM);
+      $('#alert-panel').slideDown();
+      flag = true;
+    }
+    if(flag != true){
+      var s = $(this).val();
+      for (var i = 0; i < s.length; i++) { 
+          if(pattern.test(s.substr(i,1))){
+            var DOM = "<strong>別輸入怪東西!</strong>";
+            $("#alert-panel").find("strong").remove();
+            $("#alert-panel").append(DOM);
+            $('#alert-panel').slideDown();
+            flag = true;
+            return flag;
+          }
+             // rs = rs+s.substr(i, 1).replace(pattern, ''); 
+         } 
+    }
+  }); 
+  return flag;
+}
+
+function loginCallback(json){
+  var len = Object.keys(json).length;
+   if(len > 0){
+    if(json.status == 0){
+    var uid = (json.uid).toString();
+    var eid = $.url.param("eid");
+    window.location.href = "/qrcode_form?uid=" + uid + "&eid=" + eid;
+    }else{
+      var DOM = "<strong>帳號或密碼有誤!</strong>";
+      $("#alert-panel").find("strong").remove();
+      $("#alert-panel").append(DOM);
+      $('#alert-panel').slideDown();
+    }
+   }else{
+    var DOM = "<strong>伺服器返回訊息時發生錯誤!</strong>";
+    $("#alert-panel").find("strong").remove();
+    $("#alert-panel").append(DOM);
+    $('#alert-panel').slideDown();
+
+   }
+}
+
+
+
+</script>
+
+
+</body>
+</html>
+
