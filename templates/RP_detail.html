@@ -5,9 +5,9 @@
   <title>PREtector Demo-Test</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" >
   <link href="static/css/styles.css" rel="stylesheet">
+  <link href="static/css/bootstrap4-cards.css" rel="stylesheet">
   <!-- vendor js file -->
   <script src="static/vendor/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
@@ -28,51 +28,128 @@
 </head>
 
 <body>
-<!-- Navbar -->
-<nav class="navbar">  <!-- navbar-default-->
-  <div class="container">
-    <div class="navbar-header">
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
-      </ul>
-    </div>
-  </div>
-</nav>
+
+<div id="containerdiv">
 
 <div class="container">
   <div class="row-fuild">
     <div class="row">
-      <div class="col-md-5" align="left">
-        <section id="section1">
-      <div>
-        <b><font size="5"><a>濕度 :<a id="rel_hum">0</a><a> %</a></a></font></b>
+      <div class="col-xs-4">
+        <div class="col-xs-12">&nbsp;</div>
+        <strong class="col-xs-12 text-f-36 p-l-15" id="dashboard_name"></strong>
       </div>
-      
-      <div>
-        <b><font size="5"><a>溫度 :<a id="rel_tem">0</a><a>°C</a></a></font></b>
+      <div class="col-xs-5 text-f-24">
+        <div class="col-xs-12">&nbsp;</div>
+        <strong class="col-xs-12"><span id="dashboard_date"></span><span id="dashboard_day" class="p-l-5 p-r-5"></span><span id="dashboard_time"></span></strong>
       </div>
-      
-       <div>
-        <b><font size="5"><a>使用時間 :<a id="rel_ustime">00:00:00</a><a> (min)</a></a></font></b>
+      <div class="col-xs-3">
+        <div class="col-xs-5 col-md-offset-5 p-t-5"><a class="btn btn-default full-width" href="#" role="button" onclick="showEditEquips();">編輯</a></div>
+        <div class="col-xs-12"><h5>開通日期＿<span id="active_time"></span></h5></div>
       </div>
-      
-       <div >
-        <b><font size="5"><a>開通日期 :<a id="rel_acttime"> </a></a></font></b>
-      </div>
-      </section>
-    </div>
-      <div class="col-md-2">
+<!--       <div class="col-md-2">
       <button id="makeCall" type="button" class="btn btn-danger pretector-button-voip">緊急通話<br><span style="font-size:10px;"></span></button>
       <button id="hangupCall" type="button" class="btn btn-danger pretector-button-voip" >結束通話<br><span style="font-size:10px;"></span></button>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+ <hr color="#000000" size="8px" style="margin-top: 0">
+
+ <div id="card-container">
+  <div class="col-lg-4">
+    <div class="card card-text-none l-h-200" data-eid="Rasp01" data-uid="1" data-status="0">
+      <div class="card-block-lg pretector-detail-card-title">
+      <!-- <div class="col-xs-12 pretector-detail-card-title"> -->
+      <div class="col-xs-2 no-padding"><img src="/static/img/icon-tmp-gray.png" class="icon-sensors-lg"></div>
+      <h2 class="m-t-10px">目前溫度</h2>
+      <!-- </div> -->
+      <div class="col-xs-12 pretector-detail-card-empty">&nbsp;</div>
+      <div class="col-xs-12 pretector-detail-card-subtitle text-right"><strong><span id="rel_tem"></span>°C</strong></div>
+      <div class="col-xs-12 pretector-detail-card-empty-b">&nbsp;</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card card-text-none l-h-200" data-eid="Rasp01" data-uid="1" data-status="0">
+      <div class="card-block-lg pretector-detail-card-title">
+      <!-- <div class="col-xs-12 pretector-detail-card-title"> -->
+      <div class="col-xs-2 no-padding"><img src="/static/img/icon-hum-gray.png" class="icon-sensors-lg"></div>
+      <h2 class="col-xs-10 m-t-10px">目前濕度</h2>
+      <!-- </div> -->
+      <div class="col-xs-12 pretector-detail-card-empty">&nbsp;</div>
+      <div class="col-xs-12 pretector-detail-card-subtitle text-right"><strong><span id="rel_hum"></span>%</strong></div>
+      <div class="col-xs-12 pretector-detail-card-empty-b">&nbsp;</div>
+      </div>
+    </div>
+  </div>
+    <div class="col-lg-4">
+    <div class="card card-text-none l-h-200" data-eid="Rasp01" data-uid="1" data-status="0">
+      <div class="card-block-lg pretector-detail-card-title">
+      <!-- <div class="col-xs-12 pretector-detail-card-title"> -->
+      <div class="col-xs-2 no-padding"><img src="/static/img/icon-time-gray.png" class="icon-sensors-lg"></div>
+      <h2 class="col-xs-10 m-t-10px">目前使用時間</h2>
+      <!-- </div> -->
+      <div class="col-xs-12 pretector-detail-card-empty">&nbsp;</div>
+      <div class="col-xs-12 pretector-detail-card-subtitle text-right"><strong><span id="rel_ustime">00:00:00</span></strong></div>
+      <div class="col-xs-12 pretector-detail-card-empty-b">&nbsp;</div>
       </div>
     </div>
   </div>
 </div>
 
- 
+<div class="container">
+  <div class="modal fade" id="EditEquipsModal" role="dialog">
+    <div class="modal-dialog modal-middle">
+      <div class="modal-content">
+        <div class="modal-header bg-primary" style="padding:10px;">
+          <a class="close" data-dismiss="modal">&times;</a>
+          <h4 class="modal-title">&nbsp;</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group row p-b-5">
+           <div class="col-xs-5 col-form-label text-right title-h-10">
+              <a href="/"><img class="img-home drop-shadow" src="/static/img/pretector_logo.png"></a>
+           </div>
+             <h1 class="col-xs-7 col-form-label text-c-lightblue">裝置設定</h1>
+           </div>
 
- <hr color="#000000" size="8px">
+          <div class="form-group row">
+            <label class="col-xs-3 col-form-label text-right text-c-blue">分類標籤</label>
+            <div class="col-xs-9 p-r-12">
+              <select class="form-control" id="equips_dir" name="equips_dir" form="form_modifyEquips" onchange="optionListener();">
+                  
+                </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-xs-3 col-form-label text-right text-c-blue">裝置名稱</label>
+            <div class="col-xs-9 p-r-12">
+              <input class="form-control" type="text" placeholder="Ex. 101號房" id="equips_name" name="equips_name" form="form_modifyEquips">
+            </div>
+          </div>
+          <div class="form-group row p-r-12" style="padding-left: 30px;">
+            <label class="col-xs-3 col-form-label"></label>
+            <div class="alert alert-danger alert-dismissible col-xs-9" id="alert-panel" style="display: none;" role="alert" >
+              <button type="button" class="close" onclick="$('#alert-panel').slideUp();">×</button>
+            </div>
+          </div>
+          <form id="form_modifyEquips" method='POST' name="form_modifyEquips" action="javascript:putEquiqs();">
+             <div class="form-group row p-r-9 p-l-7">
+                <div class="col-xs-6">
+                     <input type="button" class="btn btn-danger btn-block" value="刪除此裝置">
+                </div>
+                <div class="col-xs-6">
+                     <input type="submit" class="btn btn-primary btn-block" value="完成">
+                </div>
+             </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- <div class="embed-responsive embed-responsive-4by3">
   <iframe class="embed-responsive-item" src="http://140.138.77.152/phoneRTC/call.htm?svn=230"></iframe>
 </div> -->
@@ -134,12 +211,7 @@
 <video class="video" width="100%" height="100%" id="video-remote" autoplay="autoplay" style="opacity: 0;
     background-color: #000000; -webkit-transition-property: opacity; -webkit-transition-duration: 2s;"></video>
 
-
-
-<!-- Footer -->
-<footer class="container-fluid bg-4 text-center">
-
-</footer>
+</div>
 
 </body>
 </html>

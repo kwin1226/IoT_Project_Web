@@ -1,7 +1,9 @@
     $(document).ready(function() {
+        setInterval(renderTime, 1000);
         var eid = $.url.param("eid");
         var uid = $.url.param("uid");
-        console.log("eid:" + eid);
+        handlGetRequest();
+        // console.log("eid:" + eid);
         var url = "/g";
         var His_para = "sub_path=history&eid=" + eid;
         var Equip_para = "sub_path=equips&eid=" + eid;
@@ -443,8 +445,141 @@
     }
 
 
-    function Equip_rander(json){
-        var DOM_detail_data = `<h1 >`+ json[0].equipName +` <font size="5"> [`+ json[0].dirName +`]</font></h1>`;
-        $("#rel_acttime").text(json[0].equipPROD);
-        $("#section1").prepend(DOM_detail_data);
+function Equip_rander(json){
+    // var DOM_detail_data = `<h1 >`+ json[0].equipName +` <font size="5"> [`+ json[0].dirName +`]</font></h1>`;
+    $("#active_time").text(json[0].equipPROD);
+    $("#dashboard_name").text(json[0].equipName);
+    $("#equips_name").val(json[0].equipName);
+}
+
+function renderTime(){
+    var cur_date = moment().format('ll');
+    var cur_day = (moment().format('dddd')).replace("星期","週");
+    var cur_time = moment().format('h:mm:ss a');
+    // var cur_datetime = cur_date + " " + cur_day + " " + cur_time; 
+    $("#dashboard_date").text(cur_date);
+    $("#dashboard_day").text(cur_day);
+    $("#dashboard_time").text(cur_time);
+}
+
+function handlGetRequest(){
+    var uid = $.url.param("uid");
+    var eid = $.url.param("eid");
+    $("#containerdiv").attr("data-uid",uid);
+    $("#containerdiv").attr("data-eid",eid);
+    var url = "/g";
+    var Dir_para = "sub_path=directory&uid=" + uid;
+    if(!isParamNull(uid) && !isParamNull(eid)){
+            getDirJSON(url, Dir_para);
+    }else{
+      $("#containerdiv").remove();
+        var DOM = `
+        <div class="col-lg-6 col-lg-offset-3 p-t-20 fadeInAnimate">
+          <div class="form-group row">
+            <h2 class="col-xs-12 col-form-label">Oops！此頁面不存在！</h2>
+          </div>
+        </div>`;
+      $("body").append(DOM);
+    }
+}
+
+function getDirJSON(url, data){
+
+    $.ajax({
+              url: url,
+              type: 'GET',
+              dataType: 'json',
+              data: data,
+              success: function(json) { 
+                // console.log(JSON.stringify(json));
+                Dir_rander(json);
+            },
+              error: function() { console.log("Error occur in requesting to /g " + data); }
+            });
+}
+
+
+function Dir_rander(json){
+  $(".newdata").remove(); //remove orig directory
+    var DOM ="";
+    $.each(json, function(index, data){
+        DOM += `<option value="`+ data.dirid +`" class="newdata">`+ data.dirName +`</option>`;
+    });
+    // DOM += `<option value="new" class="newdata">新增...</option>`;
+    $("#equips_dir").prepend(DOM);
+}
+
+function putEquiqs(){
+  if(checkformEmpty())return;
+  var data = $('#form_modifyEquips').serialize();
+  var eid = $("#containerdiv").data("eid");
+  data += "&sub_path=equips&equips_eid=" + eid;
+  console.log(data);
+   $.ajax({
+            url: '/g',
+            type: 'PUT',
+            dataType: 'json',
+            data: data,
+            success: function(json) {
+            console.log(JSON.stringify(json)); 
+            location.reload();
+            // putEquiqsCallback(json);
+            // postActiveEquips(json);
+          },
+            error: function() { console.log("Error occur in requesting to /g" + data); }
+          });
+}
+
+function showEditEquips(){
+    $('#EditEquipsModal').modal('show');
+}
+
+function checkformEmpty(){
+  var flag = false;
+  var pattern = new RegExp("[`~!@#$^&*=|{}':;',\\[\\]<>/?~！￥……&*（）&;|{}【】‘；：”“'。，、？\"]");
+  var filter = /^09+[0-9]{8}$/;
+  // $("form input").each(function() {
+    $("#equips_name").each(function() {
+      var selectBox = document.getElementById("equips_dir");
+      var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+    if($(this).val() === ""){
+      var DOM = "<strong>有人留空白囉!</strong>";
+      $("#alert-panel").find("strong").remove();
+      $("#alert-panel").append(DOM);
+      $('#alert-panel').slideDown();
+      flag = true;
+    }
+    if(flag != true && selectedValue == "new"){
+      var DOM = "<strong>請選擇標籤!</strong>";
+      $("#alert-panel").find("strong").remove();
+      $("#alert-panel").append(DOM);
+      $('#alert-panel').slideDown();
+      flag = true;
+      return flag;
+    }
+    if(flag != true){
+      var s = $(this).val();
+      for (var i = 0; i < s.length; i++) { 
+          if(pattern.test(s.substr(i,1))){
+            var DOM = "<strong>別輸入特殊字元!</strong>";
+            $("#alert-panel").find("strong").remove();
+            $("#alert-panel").append(DOM);
+            $('#alert-panel').slideDown();
+            flag = true;
+            return flag;
+          }
+      } 
+    }
+  }); 
+  return flag;
+}
+
+
+
+function isParamNull(id){
+    if(id != "" && id != undefined && id != "undefined" && id != null && id!="null"){
+        return false;
+    }else{
+        return true;
+    }
 }

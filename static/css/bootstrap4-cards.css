@@ -22,6 +22,16 @@
   clear: both;
 }
 
+.card-block-lg {
+  padding: 35px 20px 35px 20px;
+}
+
+.card-block-lg::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 .card-title {
   margin-bottom: 0.75rem;
 }
@@ -90,6 +100,12 @@
 .icon-sensors{
   z-index:-1;
   max-height:17px;
+  display: inline;
+  margin: 0 auto;
+}
+.icon-sensors-lg{
+  z-index:-1;
+  max-height:55px;
   display: inline;
   margin: 0 auto;
 }

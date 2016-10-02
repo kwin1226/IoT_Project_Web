@@ -67,20 +67,56 @@ body{
 .p-b-30 {
   padding-bottom: 30% !important;
 }
+.p-l-5{
+  padding-left: 5% !important;
+}
+.p-l-7{
+  padding-left: 7% !important;
+}
 .p-l-10{
   padding-left: 10% !important;
 }
+.p-l-12{
+  padding-left: 12% !important;
+}
+.p-l-15{
+  padding-left: 15% !important;
+}
 .p-r-5{
-  padding-right: 10% !important;
+  padding-right: 5% !important;
+}
+.p-r-9{
+  padding-right: 9% !important;
 }
 .p-r-10{
   padding-right: 10% !important;
 }
+.p-r-12{
+  padding-right: 12% !important;
+}
+.m-l-5{
+  margin-left: 5px !important;
+}
+.m-r-5{
+  margin-right: 5px !important;
+}
 .m-t-5{
-  margin-top: 10px !important;
+  margin-top: 5px !important;
 }
 .m-t-10{
   margin-top: 10% !important;
+}
+.m-t-10px{
+  margin-top: 10px !important;
+}
+.m-t-15{
+  margin-top: 15px !important;
+}
+.m-b-5{
+  margin-bottom: 5px !important;
+}
+.m-b-10{
+  margin-bottom: 10% !important;
 }
 .l-h-8px{
   line-height: 8px;
@@ -104,6 +140,37 @@ body{
 .text-right{
   text-align: right;
 }
+.text-left{
+  text-align: left;
+}
+.text-bottom{
+  vertical-align: text-bottom;
+}
+.text-f-36 {
+color: #6B6B6B;
+font-size: 36px;
+}
+
+.text-f-24 {
+color: #6B6B6B;
+font-size: 24px;
+font-weight: 800px;
+}
+
+.noborder{
+  border:0;
+}
+.bg-primary{
+  background-color: #283F89;
+}
+.btn-primary{
+  background-color: #283F89;
+}
+.modal-middle{
+  width: 450px;
+}
+
+/*column same hight*/
 
 .pretector-button-voip {
   width:300px;
@@ -125,6 +192,19 @@ body{
   color: rgba(0, 0, 0, 0.4);
 }
 
+.pretector-detail-card-title {
+  color: #666666;
+}
+.pretector-detail-card-subtitle {
+  font-size: 55pt;
+}
+.pretector-detail-card-empty {
+  height: 80px;
+}
+
+.pretector-detail-card-empty-b {
+  height: 20px;
+}
 .login-bt{
   background-color:#283F89;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
@@ -156,6 +236,27 @@ input {
   -webkit-animation: fadein 2s; /* Safari and Chrome */
   -o-animation: fadein 2s; /* Opera */
 }
+
+/*cus layout*/
+
+.row.no-gutter [class*='col-'] {
+  padding-right:0;
+  padding-left:0;
+}
+
+.row.no-gutter .thumbnail {
+  margin-bottom: 0;
+  padding: 0;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.row.no-gutter .thumbnail>img {
+  width: 100%;
+}
+
+
+
 
 @keyframes fadein {
     from {
