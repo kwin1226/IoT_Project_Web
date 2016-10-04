@@ -31,6 +31,7 @@ socket.on('dataInit', function (json) {
 
 $('#temIntime').highcharts({
     chart: {
+        backgroundColor: 'rgba(0,0,0,0.1)',
         type: 'line',
         events : {
 	                load : function () {
@@ -122,6 +123,7 @@ $('#temIntime').highcharts({
 
 $('#humIntime').highcharts({
     chart: {
+        backgroundColor: 'rgba(0,0,0,0.1)',
         type: 'line',
         events : {
                   load : function () {

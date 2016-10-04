@@ -106,6 +106,7 @@
  function timehistory(array10){
         $('#time-History').highcharts({
         chart: {
+            backgroundColor: 'rgba(0,0,0,0.1)',
             zoomType: 'xy'
         },
         title: {
@@ -154,15 +155,6 @@
             
 
                 },
-        legend: {
-            layout: 'vertical',
-            align: 'left',
-            x: 120,
-            verticalAlign: 'top',
-            y: 100,
-            floating: true,
-            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-        },
         series: [{
             name: '輸出次數',
             type: 'column',
@@ -180,6 +172,7 @@
     function h_t_main(array, array2, array3){
         $('#h_t_chart').highcharts({
             chart: {
+                backgroundColor: 'rgba(0,0,0,0.1)',
                 zoomType: 'x'
             },
             title: {
@@ -253,6 +246,7 @@
     function t_pie(data){
         $('#t_pie').highcharts({
             chart: {
+                backgroundColor: 'rgba(0,0,0,0.1)',
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false
@@ -289,6 +283,7 @@
 
         $('#h_pie').highcharts({
             chart: {
+                backgroundColor: '#E6E6E6',
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false
@@ -323,6 +318,7 @@
     function usetime() {
     $('#usetime').highcharts({
         chart: {
+            backgroundColor: '#E6E6E6',
             type: 'area',
             spacingBottom: 30
         },
@@ -335,16 +331,6 @@
             align: 'right',
             verticalAlign: 'bottom',
             y: 15
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'left',
-            verticalAlign: 'top',
-            x: 150,
-            y: 100,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
         },
         xAxis: {
             categories: ['23:33:31', '23:45:31', '23:55:31', '24:00:31', '24:05:31', '24:10:31', '24:15:31', '24:20:31']

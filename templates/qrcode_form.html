@@ -27,7 +27,7 @@
     <div class="form-group row">
       <label class="col-xs-4 col-form-label text-right text-c-blue">分類標籤</label>
       <div class="col-xs-8">
-        <select class="form-control" id="equips_dir" name="equips_dir" form="form_modifyEquips" onchange="optionListener();">
+        <select class="form-control" id="equips_dir" name="equips_dir" form="form_modifyEquips" onchange="optionListener();" onclick="optionListener();">
             
           </select>
       </div>
@@ -122,6 +122,7 @@ function handlGetRequest(){
 }
 
 function optionListener(){
+  // alert("change");
   var selectBox = document.getElementById("equips_dir");
   var selectedValue = selectBox.options[selectBox.selectedIndex].value;
   // console.log(selectedValue);

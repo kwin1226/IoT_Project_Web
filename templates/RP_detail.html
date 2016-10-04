@@ -163,55 +163,58 @@
     <b><font size="5" face="新細明體" align="center"><a>溫度:<a id="rel_tem2">0</a><a>°C</a></a></font></b>
   </div>
 </div> -->
-
-<div class="row" >
-<div class="col-sm-6">
-<div id="humIntime" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-</div>
-<div class="col-sm-6">
-<div id="temIntime" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-</div>
-</div>
-
-<!-- <div class="col-xs-6">
-    <a>溫度:<a id="rel_tem">321</a><a>°C</a>></a>
-  </div> -->
-<!-- <div class="col-sm-6"> -->
-<div id="usetime" style="min-width: 310px; height: 200px; margin: 0 auto"></div>
-
-  
-<!-- </div> -->
-<!-- <h2>Initial Data</h2>
-<pre id='complete-data'></pre><br/>
-<h2>Data Updates</h2>
-<pre id='updated-data'></pre> -->
-
-<div class="row p-b-5" >
-  <div class="col-sm-6">
-    <div id="h_pie" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+<div class="container">
+  <div class="row p-b-5" >
+    <div class="col-xs-6">
+      <div id="humIntime" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    </div>
+    <div class="col-xs-6">
+      <div id="temIntime" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    </div>
   </div>
-  <div class="col-xs-6">
-    <div id="t_pie" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+  <!-- <div class="col-xs-6">
+      <a>溫度:<a id="rel_tem">321</a><a>°C</a>></a>
+    </div> -->
+  <div class="col-xs-12 p-b-5">
+    <div id="usetime" style="min-width: 310px; height: 200px; margin: 0 auto"></div>
   </div>
-</div>
-<div id="h_t_chart" style="min-width: 310px; height: 450px; margin: 0 auto"></div>
-<div id="time-History"  style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    
+  <!-- </div> -->
+  <!-- <h2>Initial Data</h2>
+  <pre id='complete-data'></pre><br/>
+  <h2>Data Updates</h2>
+  <pre id='updated-data'></pre> -->
 
+  <div class="row p-b-5" >
+    <div class="col-xs-6">
+      <div id="h_pie" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+    </div>
+    <div class="col-xs-6">
+      <div id="t_pie" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+    </div>
+  </div>
+  <div class="col-xs-12 p-b-5">
+    <div id="h_t_chart" style="min-width: 310px; height: 450px; margin: 0 auto"></div>
+  </div>
+  <div class="col-xs-12 p-b-5">
+    <div id="time-History"  style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+  </div>
 
-<label style="width: 100%;" align="center" id="txtRegStatus"></label>
-<label style="width: 100%;" align="center" id="txtCallStatus"></label><br>
-<!-- <button id="makeCall" type="button">Call</button> -->
-<!-- <button id="acceptCall" type="button">Accept</button> -->
-<!-- <button id="hangupCall" type="button">Hangup</button> -->
-<!-- <button id="unregister" type="button">Unregister</button> -->
-<audio id="audio-remote" autoplay="autoplay"> </audio>
-<audio id="ringtone" loop src="/static/sounds/ringtone.wav"> </audio>
-<audio id="ringbacktone" loop src="/static/sounds/ringbacktone.wav"> </audio>
-<audio id="dtmfTone" src="/static/sounds/dtmf.wav"> </audio>
-<video class="video" width="100%" height="100%" id="video-remote" autoplay="autoplay" style="opacity: 0;
-    background-color: #000000; -webkit-transition-property: opacity; -webkit-transition-duration: 2s;"></video>
-
-</div>
+  <label style="width: 100%;" align="center" id="txtRegStatus"></label>
+  <label style="width: 100%;" align="center" id="txtCallStatus"></label><br>
+  <!-- <button id="makeCall" type="button">Call</button> -->
+  <!-- <button id="acceptCall" type="button">Accept</button> -->
+  <!-- <button id="hangupCall" type="button">Hangup</button> -->
+  <!-- <button id="unregister" type="button">Unregister</button> -->
+  <audio id="audio-remote" autoplay="autoplay"> </audio>
+  <audio id="ringtone" loop src="/static/sounds/ringtone.wav"> </audio>
+  <audio id="ringbacktone" loop src="/static/sounds/ringbacktone.wav"> </audio>
+  <audio id="dtmfTone" src="/static/sounds/dtmf.wav"> </audio>
+  <video class="video" width="100%" height="100%" id="video-remote" autoplay="autoplay" style="opacity: 0;
+      background-color: #000000; -webkit-transition-property: opacity; -webkit-transition-duration: 2s;"></video>
+    </div>
+  </div>
 
 </body>
 </html>
