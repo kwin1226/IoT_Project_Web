@@ -222,6 +222,23 @@ function getAllEquipJSON(url, data){
             });
 }
 
+function delDirJSON(data){
+	var url = "/g";
+	// var data = "sub_path=directory&dirid=40";
+	console.log(data);
+	$.ajax({
+	          url: url,
+	          type: 'DELETE',
+	          dataType: 'json',
+	          data: data,
+	          success: function(json) { 
+	          	console.log("移除>" + JSON.stringify(json));
+	            handlGetRequest();
+	        },
+	          error: function() { console.log("Error occur in requesting to " + url+ data); }
+	        });
+}
+
 
 //ajax call ----end
 
@@ -230,25 +247,66 @@ function getAllEquipJSON(url, data){
 
 function Dir_rander(json){
 	$(".newdata").remove(); //remove orig directory
-    var DOM ="";
+    var DOM =``;
     $.each(json, function(index, data){
-        DOM += `<li class="newdata"><a href="#" class="hvr-border-fade" data-dirid="`+ data.dirid +
+        DOM += `<li class="newdata"><a href="#" class="hvr-border-fade newdata-dirid col-xs-12" data-dirid="`+ data.dirid +
                            `" onClick="getEquipBt(this)"><span class="img-normal"></span>`+ data.dirName +`</a></li>`;
     });
     DOM += `<li class="sidebar-none">
-    		    <a href="#" onclick="getUnusingEquiptBt()" class="hvr-border-fade newdata">
+    		    <a href="#" onclick="getUnusingEquiptBt()" class="hvr-border-fade newdata col-xs-12">
     		        未分類
     		    </a>
     		</li>
     		<li class="newdata">
-    			<a href="#" onClick="showAddDir()"　class="hvr-border-fade">
+    			<a href="#" onClick="showAddDir()" class="hvr-border-fade col-xs-12">
     				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增標籤
+    			</a>
+    		</li>
+    		<li class="newdata">
+    			<a href="#" onClick="removeDirrander()" class="hvr-border-fade col-xs-12 removeTrigger">
+    				<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>移除標籤
     			</a>
     		</li>`;
     $(".sidebar-nav").append(DOM);
     $(".sidebar-nav").find($(".newdata")).hide();
     $(".sidebar-nav").find($(".newdata")).slideDown(1000);
 
+}
+
+function removeDirSubmit(){
+	var deldir = $('#form_deletedir').serializeArray();
+	console.log("form_deletedir : " + JSON.stringify(deldir));
+	$(".removecheck, .deleteli").toggle( "slide" ,function(){
+		$(".newdata-dirid").removeClass("col-xs-9").addClass("col-xs-12");
+	});
+	$.each(deldir, function(index, data){
+		var sub_path = "sub_path=directory&dirid=" + data.value;
+		delDirJSON(sub_path);
+	});
+
+
+}
+
+function removeDirrander(){
+	var dataList = $(".newdata-dirid").map(function() {
+	    return $(this).data("dirid");
+	}).get();
+	// console.log(dataList);
+	$(".removecheck, .deleteli").remove();
+	var deleteDOM = `
+	    <li class="newdata deleteli">
+			<form id="form_deletedir" name="form_deletedir" action="javascript:removeDirSubmit();" >
+			</form> 		
+		    <a href="#" class="col-xs-12 text-right nopadding-r" onclick="$('#form_deletedir').submit()">
+		    	<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+		    </a>
+		 </li>`;
+    $(deleteDOM).insertAfter(".overall");
+	$.each(dataList, function(index,data){
+		var DOM = `<div class="col-xs-3 removecheck"><input id="`+ data +`" type="checkbox" name="dirid" value="`+ data +`" form="form_deletedir"><label for="`+ data + `"></label></div>`;
+		$(".newdata-dirid").filter("[data-dirid='"+ data +"']").removeClass("col-xs-12").addClass("col-xs-9").parent().append(DOM);
+	});
+	$(".removecheck, .deleteli").hide().toggle( "slide" );
 }
 
 function Equip_rander(json, isRemove, status, keyword){
@@ -273,7 +331,7 @@ function Equip_rander(json, isRemove, status, keyword){
             $.each(json, function(index, data){
             	if(data.equipStatus == 0){ //無人使用
             		DOM += `<div class="col-lg-3">
-                        <div class="card card-text-none l-h-200" data-eid="`+ data.eid +`" data-uid="`+ data.uid +`" data-status="`+ data.equipStatus +`">
+                        <div class="card card-text-none l-h-200" data-eid="`+ data.eid +`" data-uid="`+ data.uid +`" data-status="`+ data.equipStatus +`" onClick="getDetailPage(this);">
                           <div class="card-block">
                           <div class="col-xs-12 text-center pretector-text-title">
                             <strong>`+ data.equipName +`</strong>
@@ -381,7 +439,7 @@ function Equip_rander(json, isRemove, status, keyword){
                             <div class="col-xs-6 text-right">無</div>
                             <div class="col-xs-4">&nbsp;</div>
                             <div class="text-center l-h-300">
-                            <a href="#" class="btn btn-default text-red" >緊急通話</a>
+                            <a href="#" class="btn btn-default text-red voipcall voipcall-default">緊急通話</a>
                             </div>
                             </blockquote>
                           </div>
@@ -455,6 +513,12 @@ function AllEquip_rander(json){
             }
             ++n;
         });
+    // voipCall();
+	    $(".voipcall-default").on('click', function(e){
+	    	e.preventDefault();
+	    	e.stopPropagation();
+	    	alert("通話功能尚未接通!");
+	    });
     }
 }
 
@@ -581,13 +645,15 @@ function socketInit(){
                             <div class="col-xs-6 text-right">有</div>
                             <div class="col-xs-4">&nbsp;</div>
                             <div class="text-center l-h-300">
-                            <a href="#" class="btn btn-default text-red" >緊急通話</a>
+                            <a href="#" class="btn btn-default text-red voipcall voipcall-default">緊急通話</a>
                     </div>`;
 
 			$(".card").filter("[data-eid='"+ eid +"']").removeClass("card-header-normal card-text-none").addClass("card-header-alert");
 			$(".card").filter("[data-eid='"+ eid +"']").find('blockquote').children().remove();
 			$(".card").filter("[data-eid='"+ eid +"']").on("click", function(){getDetailPage(this);});
 			$(".card").filter("[data-eid='"+ eid +"']").find('blockquote').append(DOM).hide().fadeIn();
+
+			voipCall();
 
 		}else if(!IsUsing){   //無人使用
 			// var DOM = `<div class="col-xs-6">
@@ -615,10 +681,45 @@ function socketInit(){
 			$(".card").filter("[data-eid='"+ eid +"']").removeClass('card-header-normal card-header-alert').addClass("card-text-none");
 			$(".card").filter("[data-eid='"+ eid +"']").find('blockquote').children().remove();
 			$(".card").filter("[data-eid='"+ eid +"']").unbind('click');
+			$(".card").filter("[data-eid='"+ eid +"']").on("click", function(){getDetailPage(this);});
 			$(".card").filter("[data-eid='"+ eid +"']").find('blockquote').append(DOM).hide().fadeIn();
 		}
 	});
 }
+
+function voipCall(){
+	var DOM = `<a href="#" id="hangupCall" class="btn btn-default text-red pretector-button-voip">結束通話<span style="font-size:5px;"></span></a>`;
+	var spanDOM = `<span style="font-size:5px;"></span>`;
+    $(".card").filter("[data-eid='Rasp01']").find(".voipcall").parent().append(DOM);
+    $(".card").filter("[data-eid='Rasp01']").find(".voipcall").removeClass("voipcall-default").addClass("pretector-button-voip").attr('id', 'makeCall').append(spanDOM);
+
+    $("#hangupCall").hide();
+
+    $("#makeCall").on('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).hide();
+      $("#hangupCall").fadeIn();
+      makeCall();
+    });
+
+    $("#hangupCall").on('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).hide();
+      $("#makeCall").fadeIn();
+      hangupCall();
+    });
+
+    // $(".voipcall-default").on('click', function(e){
+    // 	e.preventDefault();
+    // 	e.stopPropagation();
+    // 	alert("通話功能尚未接通!");
+    // });
+
+}
+
+
 
 function dashboard_Status_Rander(json){
 	var randomTem = getRandomInt(26,31);
@@ -658,7 +759,7 @@ function dashboard_Status_Rander(json){
                 <div class="col-xs-6 text-right">無</div>
                 <div class="col-xs-4">&nbsp;</div>
                 <div class="text-center l-h-300">
-                <a href="#" class="btn btn-default text-red" >緊急通話</a>
+                <a href="#" class="btn btn-default text-red voipcall voipcall-default">緊急通話</a>
               </div>`;
 	if(randomTem > 30 ){
 

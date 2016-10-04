@@ -52,6 +52,20 @@ switch(method){
         };
     break;
     }
+    case 'DELETE':
+    {
+        options = {
+            host: '140.138.77.152',
+            port: 5000,
+            path: sub_path,
+            method: method,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': auth
+            }
+        };
+    break;
+    }
 }
 console.log("options > " + JSON.stringify(options));
 try {

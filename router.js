@@ -36,9 +36,13 @@ module.exports = {
       console.log("req.body:" + req.body);
       rest.postJSON(req,res);
     });
-    app.put('/g', function(req, res) { //make a HTTP POST request to API 
+    app.put('/g', function(req, res) { //make a HTTP PUT request to API 
       console.log("req.body:" + req.body);
       rest.putJSON(req,res);
+    });
+    app.delete('/g', function(req, res) { //make a HTTP DELETE request to API 
+      console.log("req.body:" + req.url);
+      rest.deleteJSON(req,res);
     });
 
   } catch (err) {

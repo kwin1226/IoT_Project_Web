@@ -1,5 +1,5 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
-
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 body{
   font-family: 'Noto Sans TC', sans-serif;
   font-weight: 500;
@@ -82,6 +82,9 @@ body{
 .p-l-15{
   padding-left: 15% !important;
 }
+.p-l-50{
+  padding-left: 50% !important;
+}
 .p-r-5{
   padding-right: 5% !important;
 }
@@ -160,6 +163,9 @@ font-weight: 800px;
 .noborder{
   border:0;
 }
+.nopadding-r{
+  padding-right:0;
+}
 .bg-primary{
   background-color: #283F89;
 }
@@ -170,13 +176,17 @@ font-weight: 800px;
   width: 450px;
 }
 
+.btn-voip-connected{
+  
+}
+
 /*column same hight*/
 
-.pretector-button-voip {
+/*.pretector-button-voip {
   width:300px;
   height:200px;
   font-size:30px;
-}
+}*/
 
 .pretector-text-title {
   padding-bottom: 5%;
@@ -391,3 +401,19 @@ input {
     box-shadow: inset 0px 0px 0px 30px #7ac142;
   }
 }
+
+/*** custom checkboxes ***/
+
+input[type=checkbox] { display:none; } /* to hide the checkbox itself */
+input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  color:#FFFFFF;
+  border-color: #FFFFFF;
+  display: inline-block;
+}
+
+input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
+input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
+
+input[type=checkbox]:checked + label:before { content: "\f046"; } /* checked icon */
+input[type=checkbox]:checked + label:before { letter-spacing: 5px; } /* allow space for check mark */

@@ -181,6 +181,42 @@ function REST() {
                 });
             }
     }
+
+    this.deleteJSON = function(req,res){
+        try{
+            var method = 'DELETE';
+            var v = '/v1.0/';
+            var sub_path = v + req.body.sub_path;
+
+            switch(req.body.sub_path){
+                case 'directory' :
+                        var dirid = req.body.dirid;
+                        if(!isParamNull(dirid)){
+                            sub_path += "/" + dirid;
+                        }
+                break;
+            }
+
+            
+            console.log("sub_path: " + sub_path);
+            httpRequest.init(sub_path, method,
+                function(statusCode, result){
+                    res.statusCode = statusCode;
+                    res.send(result);
+            });
+          
+            }catch (err){
+                console.error("||routes err: " + err.code);
+                res.statusCode = 500;
+                res.send({
+                    result: 'error',
+                    err:    err.code
+                });
+            }
+    };
+
+
+
 };
 
 function isParamNull(id){

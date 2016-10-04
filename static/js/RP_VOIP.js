@@ -1,28 +1,30 @@
 $(function(){
-    $("#hangupCall").hide();
-    $("#unregister").on('click', function(e){
-      e.preventDefault();
-      unregister();
-    });
+    // $("#hangupCall").hide();
+    // $("#unregister").on('click', function(e){
+    //   e.preventDefault();
+    //   unregister();
+    // });
 
-    $("#makeCall").on('click', function(e){
-      e.preventDefault();
-      $(this).hide();
-      $("#hangupCall").fadeIn();
-      makeCall();
-    });
+    // $("#makeCall").on('click', function(e){
+    //   e.preventDefault();
+    //   e.stopPropagation();
+    //   $(this).hide();
+    //   $("#hangupCall").fadeIn();
+    //   makeCall();
+    // });
 
-    $("#hangupCall").on('click', function(e){
-      e.preventDefault();
-      $(this).hide();
-      $("#makeCall").fadeIn();
-      hangupCall();
-    });
+    // $("#hangupCall").on('click', function(e){
+    //   e.preventDefault();
+    //   e.stopPropagation();
+    //   $(this).hide();
+    //   $("#makeCall").fadeIn();
+    //   hangupCall();
+    // });
 
-    $("#acceptCall").on('click', function(e){
-      e.preventDefault();
-      acceptCall();
-    });
+    // $("#acceptCall").on('click', function(e){
+    //   e.preventDefault();
+    //   acceptCall();
+    // });
 
 
   });
