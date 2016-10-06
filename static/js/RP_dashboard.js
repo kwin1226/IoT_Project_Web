@@ -631,8 +631,9 @@ function socketInit(){
    //                          <div class="text-center l-h-300">
    //                          <a href="#" class="btn btn-default text-red voipcall voipcall-default">緊急通話</a>
    //                  </div>`;
+   		 var cur_time = moment().format('h:mm:ss');
    		 var DOM =`<div class="col-xs-2 no-padding"><img src="/static/img/icon-fall.png" class="icon-sensors"></div>
-                               <div class="col-xs-6 text-right">有</div>
+                               <div class="col-xs-6 text-right">`+ cur_time + `</div>
                                <div class="col-xs-4"><img src="/static/img/icon-warn.png" class="icon-sensors"></div>
    		 					   <div class="col-xs-2 no-padding">&nbsp;</div>
                                <div class="col-xs-6 text-right pretector-text-tem">&nbsp;</div>
@@ -775,7 +776,7 @@ function dashboard_Status_Rander(json){
                 <div class="text-center l-h-300">
                 <a href="#" class="btn btn-default text-red voipcall voipcall-default">緊急通話</a>
               </div>`;
-	if(randomTem > 30 ){
+	if(randomTem > 27 ){
 
 		$(".card").filter("[data-eid='Rasp06'][data-status!=0]").removeClass('card-header-normal').addClass("card-header-alert");
 		$(".card").filter("[data-eid='Rasp06'][data-status!=0]").find('blockquote').children().remove();
