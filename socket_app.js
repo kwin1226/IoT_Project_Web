@@ -20,7 +20,7 @@ exports.configure = function configure(io){
     }
 
     function dataInit(callback){
-        var startDay = '2016-08-30 00:00:00'; //以2016-08-31 當範例，之後時間需動態
+        var startDay = '2016-09-10 00:00:00'; //以2016-08-31 當範例，之後時間需動態
         var endDay = '2016-09-20 23:59:59'; 
         var sub_path = '/v1.0/history/Rasp01/date/' + encodeURIComponent(startDay) + '/' + encodeURIComponent(endDay);
         var method = 'GET';

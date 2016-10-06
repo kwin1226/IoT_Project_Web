@@ -297,7 +297,7 @@ function removeDirrander(){
 	    <li class="newdata deleteli">
 			<form id="form_deletedir" name="form_deletedir" action="javascript:removeDirSubmit();" >
 			</form> 		
-		    <a href="#" class="col-xs-12 text-right nopadding-r" onclick="$('#form_deletedir').submit()">
+		    <a href="#" class="col-xs-12 text-right nopadding-r" onclick="$('#delDirModal').modal('show');">
 		    	<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 		    </a>
 		 </li>`;
@@ -616,37 +616,37 @@ function socketInit(){
 
 		}else if(IsUsing && IsFalldown){  //使用中如有跌倒意外
 
-			// console.log("randering");
-			// var DOM =  `<div class="col-xs-6">
-		 //                <img src="/static/img/icondash-10.png" class="img-fluid bg-sensors" alt="Responsive image">
-		 //                <p><span class="pretector-text-tem">28°C</span></p>
-		 //                </div>
-		 //                <div class="col-xs-6">
-		 //                <img src="/static/img/icondash-09.png" class="img-fluid bg-sensors" alt="Humidity">
-		 //                <p><span class="pretector-text-hum">40%</span></p>
-		 //                </div>
-		 //                <div class="col-xs-6">
-		 //                <img src="/static/img/icondash-11.png" class="img-fluid bg-sensors" alt="Usetime">
-		 //                <p><span class="pretector-text-utime1">10</span><span class="pretector-text-utime2">mins</span></p>
-		 //                </div>
-		 //                <div class="col-xs-6">
-		 //                <img src="/static/img/icondash-12.png" class="img-fluid bg-sensors" alt="Usetime">
-		 //                </div>`;
-		 var DOM =`<div class="col-xs-2 no-padding"><img src="/static/img/icon-tmp.png" class="icon-sensors"></div>
-                            <div class="col-xs-6 text-right pretector-text-tem">0°C</div>
-                            <div class="col-xs-4 no-padding text-right">&nbsp;</div>
-                            <div class="col-xs-2 no-padding"><img src="/static/img/icon-hum.png" class="icon-sensors"></div>
-                            <div class="col-xs-6 text-right pretector-text-hum">0%</div>
-                            <div class="col-xs-4 no-padding text-right">&nbsp;</div>
-                            <div class="col-xs-2 no-padding"><img src="/static/img/icon-time.png" class="icon-sensors"></div>
-                            <div class="col-xs-6 text-right pretector-text-utime1">0mins</div>
-                            <div class="col-xs-4 no-padding text-right">&nbsp;</div>
-                            <div class="col-xs-2 no-padding"><img src="/static/img/icon-fall.png" class="icon-sensors"></div>
-                            <div class="col-xs-6 text-right">有</div>
-                            <div class="col-xs-4">&nbsp;</div>
-                            <div class="text-center l-h-300">
-                            <a href="#" class="btn btn-default text-red voipcall voipcall-default">緊急通話</a>
-                    </div>`;
+		 // var DOM =`<div class="col-xs-2 no-padding hide"><img src="/static/img/icon-tmp.png" class="icon-sensors"></div>
+   //                          <div class="col-xs-6 text-right pretector-text-tem hide">0°C</div>
+   //                          <div class="col-xs-4 no-padding text-right">&nbsp;</div>
+   //                          <div class="col-xs-2 no-padding hide"><img src="/static/img/icon-hum.png" class="icon-sensors"></div>
+   //                          <div class="col-xs-6 text-right pretector-text-hum hide">0%</div>
+   //                          <div class="col-xs-4 no-padding text-right">&nbsp;</div>
+   //                          <div class="col-xs-2 no-padding hide"><img src="/static/img/icon-time.png" class="icon-sensors"></div>
+   //                          <div class="col-xs-6 text-right pretector-text-utime1 hide">0mins</div>
+   //                          <div class="col-xs-4 no-padding text-right">&nbsp;</div>
+   //                          <div class="col-xs-2 no-padding"><img src="/static/img/icon-fall.png" class="icon-sensors"></div>
+   //                          <div class="col-xs-6 text-right">有</div>
+   //                          <div class="col-xs-4"><img src="/static/img/icon-warn.png" class="icon-sensors"></div>
+   //                          <div class="text-center l-h-300">
+   //                          <a href="#" class="btn btn-default text-red voipcall voipcall-default">緊急通話</a>
+   //                  </div>`;
+   		 var DOM =`<div class="col-xs-2 no-padding"><img src="/static/img/icon-fall.png" class="icon-sensors"></div>
+                               <div class="col-xs-6 text-right">有</div>
+                               <div class="col-xs-4"><img src="/static/img/icon-warn.png" class="icon-sensors"></div>
+   		 					   <div class="col-xs-2 no-padding">&nbsp;</div>
+                               <div class="col-xs-6 text-right pretector-text-tem">&nbsp;</div>
+                               <div class="col-xs-4 no-padding text-right">&nbsp;</div>
+                               <div class="col-xs-2 no-padding">&nbsp;</div>
+                               <div class="col-xs-6 text-right pretector-text-hum">&nbsp;</div>
+                               <div class="col-xs-4 no-padding text-right">&nbsp;</div>
+                               <div class="col-xs-2 no-padding">&nbsp;</div>
+                               <div class="col-xs-6 text-right pretector-text-utime1">&nbsp;</div>
+                               <div class="col-xs-4 no-padding text-right">&nbsp;</div>
+                               <div class="text-center l-h-300">
+                               <a href="#" class="btn btn-default text-red voipcall voipcall-default">緊急通話</a>
+                       </div>`;
+
 
 			$(".card").filter("[data-eid='"+ eid +"']").removeClass("card-header-normal card-text-none").addClass("card-header-alert");
 			$(".card").filter("[data-eid='"+ eid +"']").find('blockquote').children().remove();
@@ -719,12 +719,11 @@ function voipCall(){
 
 }
 
-
-
 function dashboard_Status_Rander(json){
 	var randomTem = getRandomInt(26,31);
 	var randomHum = getRandomInt(50,55);
 	var randomUtime = getRandomInt(10,10);
+	var humFalg = false;
 	$.each(json, function(index, data){
 		var tmpTem = data.historyTem + "°C";
 		var tmpHum = data.historyHum + "%";
@@ -733,7 +732,7 @@ function dashboard_Status_Rander(json){
 		var m = parseInt(d2[1],10);
 		var s = Math.round((parseInt(d2[2],10)/60)*10)/10; //轉換mins小數
 		var tmpUTime = m+s + "mins";
-		if(data.historyTem > 27 || randomHum > 90 ){
+		if(data.historyTem > 30 || randomHum > 90 ){
 			$(".card").filter("[data-eid='Rasp01'][data-status!=0]").removeClass('card-header-normal').addClass("card-header-alert");
 			$(".card").filter("[data-eid='Rasp01'][data-status!=0]").find('div.pretector-text-tem').css("color", "red");
 		}else{
@@ -741,37 +740,59 @@ function dashboard_Status_Rander(json){
 		}
 		// var Rasp01dom = $(".card").find("[data-eid='Rasp01'] span.pretector-text-tem");
 		// console.log(JSON.stringify(Rasp01dom));
-		$(".card").filter("[data-eid='Rasp01']").find("div.pretector-text-tem").hide().text(tmpTem).slideDown();
-		$(".card").filter("[data-eid='Rasp01']").find("div.pretector-text-hum").hide().text(tmpHum).slideDown();
-		$(".card").filter("[data-eid='Rasp01']").find("div.pretector-text-utime1").hide().text(tmpUTime).slideDown();
+		// $(".card").filter("[data-eid='Rasp01']").find("div.pretector-text-tem").hide().text(tmpTem).slideDown();
+		// $(".card").filter("[data-eid='Rasp01']").find("div.pretector-text-hum").hide().text(tmpHum).slideDown();
+		// $(".card").filter("[data-eid='Rasp01']").find("div.pretector-text-utime1").hide().text(tmpUTime).slideDown();
 	});	
 	var warnDOM = `<img src="/static/img/icon-warn.png" class="icon-sensors">`;
-	var DOM =`<div class="col-xs-2 no-padding"><img src="/static/img/icon-tmp.png" class="icon-sensors"></div>
+	// var DOM =`<div class="col-xs-2 no-padding"><img src="/static/img/icon-tmp.png" class="icon-sensors"></div>
+ //                <div class="col-xs-6 text-right pretector-text-tem">`+ randomTem +`°C</div>
+ //                <div class="col-xs-4 no-padding text-right">&nbsp;</div>
+ //                <div class="col-xs-2 no-padding hide"><img src="/static/img/icon-hum.png" class="icon-sensors"></div>
+ //                <div class="col-xs-6 text-right pretector-text-hum hide">`+ randomHum +`%</div>
+ //                <div class="col-xs-4 no-padding text-right">&nbsp;</div>
+ //                <div class="col-xs-2 no-padding hide><img src="/static/img/icon-time.png" class="icon-sensors"></div>
+ //                <div class="col-xs-6 text-right pretector-text-utime1 hide">`+ randomUtime +`mins</div>
+ //                <div class="col-xs-4 no-padding text-right">&nbsp;</div>
+ //                <div class="col-xs-2 no-padding hide"><img src="/static/img/icon-fall.png" class="icon-sensors"></div>
+ //                <div class="col-xs-6 text-right hide">無</div>
+ //                <div class="col-xs-4">&nbsp;</div>
+ //                <div class="text-center l-h-300">
+ //                <a href="#" class="btn btn-default text-red voipcall voipcall-default">緊急通話</a>
+ //              </div>`;
+ 	var DOM =`<div class="col-xs-2 no-padding"><img src="/static/img/icon-tmp.png" class="icon-sensors"></div>
                 <div class="col-xs-6 text-right pretector-text-tem">`+ randomTem +`°C</div>
                 <div class="col-xs-4 no-padding text-right">&nbsp;</div>
-                <div class="col-xs-2 no-padding"><img src="/static/img/icon-hum.png" class="icon-sensors"></div>
-                <div class="col-xs-6 text-right pretector-text-hum">`+ randomHum +`%</div>
+                <div class="col-xs-2 no-padding">&nbsp;</div>
+                <div class="col-xs-6 text-right pretector-text-hum">&nbsp;</div>
                 <div class="col-xs-4 no-padding text-right">&nbsp;</div>
-                <div class="col-xs-2 no-padding"><img src="/static/img/icon-time.png" class="icon-sensors"></div>
-                <div class="col-xs-6 text-right pretector-text-utime1">`+ randomUtime +`mins</div>
+                <div class="col-xs-2 no-padding">&nbsp;</div>
+                <div class="col-xs-6 text-right pretector-text-utime1">&nbsp;</div>
                 <div class="col-xs-4 no-padding text-right">&nbsp;</div>
-                <div class="col-xs-2 no-padding"><img src="/static/img/icon-fall.png" class="icon-sensors"></div>
-                <div class="col-xs-6 text-right">無</div>
+                <div class="col-xs-2 no-padding">&nbsp;</div>
+                <div class="col-xs-6 text-right">&nbsp;</div>
                 <div class="col-xs-4">&nbsp;</div>
                 <div class="text-center l-h-300">
                 <a href="#" class="btn btn-default text-red voipcall voipcall-default">緊急通話</a>
               </div>`;
 	if(randomTem > 30 ){
 
-		$(".card").filter("[data-eid!='Rasp01'][data-status!=0]").removeClass('card-header-normal').addClass("card-header-alert");
-		$(".card").filter("[data-eid!='Rasp01'][data-status!=0]").find('blockquote').children().remove();
-		$(".card").filter("[data-eid!='Rasp01'][data-status!=0]").find('div.pretector-text-tem').next().children().remove();
-		$(".card").filter("[data-eid!='Rasp01'][data-status!=0]").find('blockquote').append(DOM).hide().fadeIn();
-		$(".card").filter("[data-eid!='Rasp01'][data-status!=0]").find('div.pretector-text-tem').next().append(warnDOM);
+		$(".card").filter("[data-eid='Rasp06'][data-status!=0]").removeClass('card-header-normal').addClass("card-header-alert");
+		$(".card").filter("[data-eid='Rasp06'][data-status!=0]").find('blockquote').children().remove();
+		$(".card").filter("[data-eid='Rasp06'][data-status!=0]").find('div.pretector-text-tem').next().children().remove();
+		// $(".card").filter("[data-eid='Rasp06'][data-status!=0]").find('blockquote').append(DOM).hide().fadeIn();
+		$(".card").filter("[data-eid='Rasp06'][data-status!=0]").find('blockquote').append(DOM);
+		$(".card").filter("[data-eid='Rasp06'][data-status!=0]").find('div.pretector-text-tem').prev().fadeIn();
+		$(".card").filter("[data-eid='Rasp06'][data-status!=0]").find('div.pretector-text-tem').fadeIn();
+		$(".card").filter("[data-eid='Rasp06'][data-status!=0]").find('div.pretector-text-tem').next().append(warnDOM);
 		// $(".card").filter("[data-eid!='Rasp01'][data-status!=0]").find('span.pretector-text-hum').css("color", "red");
-	}else if(randomHum > 90){
-		$(".card").filter("[data-eid!='Rasp01'][data-status!=0]").find('div.pretector-text-hum').next().children().remove();
-		$(".card").filter("[data-eid!='Rasp01'][data-status!=0]").find('div.pretector-text-hum').next().append(warnDOM);
+	}else if(randomHum > 53){
+		humFalg = true;
+		$(".card").filter("[data-eid='Rasp06'][data-status!=0]").find('div.pretector-text-hum').prev().text("");
+		$(".card").filter("[data-eid='Rasp06'][data-status!=0]").find('div.pretector-text-hum').prev().append('<img src="/static/img/icon-hum.png" class="icon-sensors">');
+		$(".card").filter("[data-eid='Rasp06'][data-status!=0]").find('div.pretector-text-hum').text(randomHum + "%");
+		$(".card").filter("[data-eid='Rasp06'][data-status!=0]").find('div.pretector-text-hum').next().children().remove();
+		$(".card").filter("[data-eid='Rasp06'][data-status!=0]").find('div.pretector-text-hum').next().append(warnDOM);
 	}else{  //沒意外的話
 		// $(".card").filter("[data-eid!='Rasp01'][data-status!=0]").find('.card-header').removeClass('card-header-alert').addClass("card-header-normal");
 	}
@@ -779,8 +800,14 @@ function dashboard_Status_Rander(json){
 	 randomHum = randomHum.toString() + "%";
 	 randomUtime = randomUtime.toString() + "mins";
 	$(".card").filter("[data-eid!='Rasp01']").find("div.pretector-text-tem").hide().text(randomTem).slideDown();
-	$(".card").filter("[data-eid!='Rasp01']").find("div.pretector-text-hum").hide().text(randomHum).slideDown();
-	$(".card").filter("[data-eid!='Rasp01']").find("div.pretector-text-utime1").hide().text(randomUtime).slideDown();
+	var humtext = $(".card").filter("[data-eid='Rasp06']").find("div.pretector-text-hum").text();
+	if(humtext.indexOf("%") >= 0){
+		$(".card").filter("[data-eid!='Rasp01']").find("div.pretector-text-hum").hide().text(randomHum).slideDown();
+	}
+	// $(".card").filter("[data-eid!='Rasp01']").find("div.pretector-text-utime1").hide().text(randomUtime).slideDown();
+	// $(".card").filter("[data-eid!='Rasp01']").find("div.pretector-text-tem").hide().text(randomTem);
+	// $(".card").filter("[data-eid!='Rasp01']").find("div.pretector-text-hum").text(randomHum);
+	// $(".card").filter("[data-eid!='Rasp01']").find("div.pretector-text-utime1").text(randomUtime);
 }
 
 //real time call ----- end
