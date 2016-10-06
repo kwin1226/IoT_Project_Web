@@ -166,6 +166,12 @@ font-weight: 800px;
 .noborder{
   border:0;
 }
+.nopadding{
+  padding:0;
+}
+.nomargin{
+  margin:0;
+}
 .nopadding-r{
   padding-right:0;
 }
