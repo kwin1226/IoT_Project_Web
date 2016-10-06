@@ -100,12 +100,11 @@
         $(".highcharts-xaxis-labels").remove();
     }
 
-      
-    
 
  function timehistory(array10){
         $('#time-History').highcharts({
         chart: {
+            borderRadius: 6,
             backgroundColor: 'rgba(0,0,0,0.1)',
             zoomType: 'xy'
         },
@@ -172,6 +171,7 @@
     function h_t_main(array, array2, array3){
         $('#h_t_chart').highcharts({
             chart: {
+                borderRadius: 6,
                 backgroundColor: 'rgba(0,0,0,0.1)',
                 zoomType: 'x'
             },
@@ -246,6 +246,7 @@
     function t_pie(data){
         $('#t_pie').highcharts({
             chart: {
+                borderRadius: 6,
                 backgroundColor: 'rgba(0,0,0,0.1)',
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
@@ -283,6 +284,7 @@
 
         $('#h_pie').highcharts({
             chart: {
+                borderRadius: 6,
                 backgroundColor: '#E6E6E6',
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
@@ -318,6 +320,7 @@
     function usetime() {
     $('#usetime').highcharts({
         chart: {
+            borderRadius: 6,
             backgroundColor: '#E6E6E6',
             type: 'area',
             spacingBottom: 30
