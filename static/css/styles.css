@@ -64,6 +64,9 @@ body{
 .p-b-5 {
   padding-bottom: 5% !important;
 }
+.p-b-8 {
+  padding-bottom: 8% !important;
+}
 .p-b-10 {
   padding-bottom: 10% !important;
 }
@@ -195,6 +198,21 @@ font-weight: 800px;
 .btn-voip-connected{
   
 }
+.row-same-height {
+  display: flex;
+}
+
+/*
+ * Row with equal height columns
+ * --------------------------------------------------
+ */
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}
+
 
 /*column same hight*/
 
@@ -255,6 +273,9 @@ input {
 }
 .full-width{
   width: 100%;
+}
+.full-height{
+  height: 100% !important;
 }
 .fadeInAnimate{
   animation: fadein 2s;

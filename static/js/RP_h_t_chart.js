@@ -555,6 +555,13 @@ function showEditEquips(){
     $('#EditEquipsModal').modal('show');
 }
 
+function backtopage(e){
+    e.preventDefault();
+    var uid = $("#containerdiv").data("uid");
+    var url = "/dashboard?uid=" + uid;
+    window.location.href = url;
+}
+
 function checkformEmpty(){
   var flag = false;
   var pattern = new RegExp("[`~!@#$^&*=|{}':;',\\[\\]<>/?~！￥……&*（）&;|{}【】‘；：”“'。，、？\"]");
