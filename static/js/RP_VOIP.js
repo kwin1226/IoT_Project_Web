@@ -200,10 +200,10 @@ $(function(){
     function createSipStack() {
         sipStack = new SIPml.Stack({
                                 realm: '140.138.77.152', // mandatory domain name
-                                impi: '6000', // mandatory authorisation name
-                                impu: 'sip:6000@140.138.77.152', // mandatory sip uri
-                                password: '6000', //optional
-                                display_name: '6000', // optional
+                                impi: '6001', // mandatory authorisation name
+                                impu: 'sip:6001@140.138.77.152', // mandatory sip uri
+                                password: '6001', //optional
+                                display_name: '6001', // optional
                                 websocket_proxy_url: 'ws://140.138.77.152:8088/ws', // optional
                                 // outbound_proxy_url: 'udp://example.com:5060', // optional
                                 ice_servers:"[{ url: 'stun:stun.l.google.com:19302'}]",

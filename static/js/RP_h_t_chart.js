@@ -43,37 +43,73 @@
 
             // console.log("Key is " + k + ", value is" + array9[i]);
         }
-        // console.log( "value is" + array9);
+        // console.log(JSON.stringify(array9));
 
 
         array.forEach(function(x) { array4[x] = (array4[x] || 0)+1; });
         array2.forEach(function(x) { array6[x] = (array6[x] || 0)+1; });
         array9.forEach(function(x) { array8[x] = (array8[x] || 0)+1; });
-
+        // console.log(JSON.stringify(array6));
         var i =0;
         for (var k in array4){
 
             if (array4.hasOwnProperty(k)) {
                  array5[i] = [];
-                 array5[i].push(k);
+                 array5[i].push(k+"°C");
                  array5[i].push(array4[k]);
                  //console.log("Key is " + k + ", value is" + array4[k]);
             }
             i++;
         }
-
+//0~25、25~50、50~75、75~100
         var j =0;
+        var val25 = ["濕度:0%~25%",0];
+        var val50 = ["濕度:25%~50%",0];
+        var val75 = ["濕度:50%~75%",0];
+        var val100 = ["濕度:75%~100%",0];
         for (var k in array6){
 
             if (array6.hasOwnProperty(k)) {
-                 array7[j] = [];
-                 array7[j].push(k);
-                 array7[j].push(array6[k]);
-                 //console.log("Key is " + k + ", value is" + array4[k]);
-            }
-            j++;
-        }
+                
+                var tmp = parseInt(k,10);
+                if(tmp >= 0 && tmp < 25){
+                    val25[1] += array6[k];
 
+                }else if(tmp >= 25 && tmp < 50){
+                    val50[1] += array6[k];
+
+                }else if(tmp >= 50 && tmp < 75){
+                    val75[1] += array6[k];
+
+                }else if(tmp >= 75 && tmp <= 100){
+                    val100[1] += array6[k];
+                }
+            }
+        }
+        array7.push(val25);
+        array7.push(val50);
+        array7.push(val75);
+        array7.push(val100);
+
+        console.log("val25:" + val25);
+        console.log("val50:" + val50);
+        console.log("val75:" + val75);
+        console.log("val100:" + val100);
+
+        // var j =0;
+        // for (var k in array6){
+
+        //     if (array6.hasOwnProperty(k)) {
+                
+        //         array7[j] = [];
+        //         array7[j].push(k);
+        //         array7[j].push(array6[k]);
+        //         console.log("Key is " + k + ", value is" + array6[k]);
+        //     }
+        //     j++;
+        // }
+
+        // console.log(JSON.stringify(array8));
         var u =0;
         for (var k in array8){
 
@@ -90,14 +126,14 @@
             }
         u++;
         }
-        console.log(array10);
+        console.log(JSON.stringify(array10));
 
         h_t_main(array, array2, array3);
         t_pie(array5);
         h_pie(array7);
         usetime();
         timehistory(array10);
-        $(".highcharts-xaxis-labels").remove();
+        // $(".highcharts-xaxis-labels").remove();
     }
 
 
@@ -105,11 +141,11 @@
         $('#time-History').highcharts({
         chart: {
             borderRadius: 6,
-            backgroundColor: 'rgba(0,0,0,0.1)',
+            backgroundColor: 'rgba(245,245,245,10)',
             zoomType: 'xy'
         },
         title: {
-            text: '時段資料輸出次數統計圖'
+            text: '使用時間分布頻率圖'
         },
         
         xAxis: [{
@@ -129,7 +165,7 @@
                 }
             },
             title: {
-                text: '輸出次數',
+                text: '資料收集次數',
                 style: {
                     color: Highcharts.getOptions().colors[1]
                 }
@@ -149,13 +185,13 @@
             },
             opposite: true
         }],
-        tooltip: {
-            shared: true
+        // tooltip: {
+        //     shared: true
             
 
-                },
+        //         },
         series: [{
-            name: '輸出次數',
+            name: '資料收集次數',
             type: 'column',
 
             yAxis: 1,
@@ -172,28 +208,24 @@
         $('#h_t_chart').highcharts({
             chart: {
                 borderRadius: 6,
-                backgroundColor: 'rgba(0,0,0,0.1)',
+                backgroundColor: 'rgba(245,245,245,10)',
                 zoomType: 'x'
             },
             title: {
                 text: '溫溼度歷史趨勢'
             },
-            subtitle: {
-                text: document.ontouchstart === undefined ?
-                        'HUM&TEM' :
-                        'Pinch the chart to zoom in'
-            },
             xAxis: {
-                //series:[{
-                //type: "datetime",
+            //     series:[{
+            //     type: "datetime",
                   
-                //dateTimeLabelFormats: {
-               // day: '%Y-%m-%d'
-            //},
-            categories:array3
-                //data:array3
-             // time = Date.getTime(historyTime)
-                // minRange: 24 * 3600000 // fourteen days
+            //     dateTimeLabelFormats: {
+            //    day: '%Y-%m-%d'
+            // },
+            categories:array3,
+            // labels: {enabled:true},
+            //     //data:array3
+            //  // time = Date.getTime(historyTime)
+                 // minRange: 14 * 24 * 3600000 // fourteen days
 
             },
             yAxis: {
@@ -228,14 +260,14 @@
 
             series: [{
                 type: 'line',
-                name: 'Tem',
-                //pointInterval:  3600 * 1000,
+                name: '溫度',
+                // pointInterval:  24*3600 * 1000,
                 //pointStart: Date.UTC(2006, 0, 1),
                 data: array 
             },{//這一段該如何做輸入?
                 type: 'line',
-                name: 'Hum',
-                //pointInterval:  3600 * 1000,
+                name: '濕度',
+                // pointInterval:  24*3600 * 1000,
                 //pointStart: Date.UTC(2006, 0, 1),
                 data: array2
                 //color: '#f7a35c'
@@ -247,7 +279,7 @@
         $('#t_pie').highcharts({
             chart: {
                 borderRadius: 6,
-                backgroundColor: 'rgba(0,0,0,0.1)',
+                backgroundColor: 'rgba(245,245,245,10)',
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false
@@ -263,7 +295,7 @@
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: {
-                        enabled: true,
+                        enabled: false,
                         format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                         style: {
                             color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
@@ -273,8 +305,8 @@
             },
             series: [{
                 type: 'pie',
-                name: '溫度比例',
-                 data:data
+                name: '區間比例',
+                data:data
             }]
         });
     }
@@ -285,7 +317,7 @@
         $('#h_pie').highcharts({
             chart: {
                 borderRadius: 6,
-                backgroundColor: '#E6E6E6',
+                backgroundColor: 'rgba(245,245,245,10)',
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false
@@ -301,7 +333,7 @@
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: {
-                        enabled: true,
+                        enabled: false,
                         format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                         style: {
                             color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
@@ -311,7 +343,7 @@
             },
             series: [{
                 type: 'pie',
-                name: '濕度比例',
+                name: '區間比例',
                  data:data
             }]
         });
@@ -321,7 +353,7 @@
     $('#usetime').highcharts({
         chart: {
             borderRadius: 6,
-            backgroundColor: '#E6E6E6',
+            backgroundColor: 'rgba(245,245,245,10)',
             type: 'area',
             spacingBottom: 30
         },
@@ -412,7 +444,7 @@
                   success: function(json) { 
                     console.log(json);
                     Equip_rander(json);
-                    console.log("裝置:"+JSON.stringify(json)) 
+                    // console.log("裝置:"+JSON.stringify(json));
                 },
                 // beforeSend: function(){
                 //   var loadingMask = `

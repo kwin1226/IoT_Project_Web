@@ -18,7 +18,7 @@ socket.on('dataInit', function (json) {
 
      	intime_TEM.push(data.historyTem);
         intime_HUM.push(data.historyHum);
- 		intime_gmt.push(data.historyGMT);
+ 		intime_gmt.push(data.historyTime);
  });
 	
 	    Highcharts.setOptions({
@@ -32,7 +32,7 @@ socket.on('dataInit', function (json) {
 $('#temIntime').highcharts({
     chart: {
         borderRadius: 6,
-        backgroundColor: 'rgba(0,0,0,0.1)',
+        backgroundColor: 'rgba(245,245,245,10)',
         type: 'line',
         events : {
 	                load : function () {
@@ -41,7 +41,10 @@ $('#temIntime').highcharts({
 	            }
     },
     title: {
-        text: '溫度即時圖'
+        text: '溫度即時圖',
+        style: {
+                    color: '#606060'
+                }
     },
     
     xAxis: {
@@ -50,7 +53,10 @@ $('#temIntime').highcharts({
     },
     yAxis: {
         title: {
-            text: '攝氏溫標（°C）'
+            text: '攝氏溫標（°C）',
+            style: {
+                    color: '#606060'
+                }
         },
         // min: 0,
         // minorGridLineWidth: 0,
@@ -59,11 +65,11 @@ $('#temIntime').highcharts({
         plotBands: [{ // Light air
             from: 22,
             to: 25,
-            color: 'rgba(68, 170, 213, 0.1)',
+            color: 'rgba(65,105,225,10)',
             label: {
                 text: 'SAFE',
-                style: {
-                    color: '#606060'
+              style: {
+                    color: '#FFFFFF'
                 }
             }
         }, { // Light breeze
@@ -72,18 +78,18 @@ $('#temIntime').highcharts({
             color: 'rgba(0, 0, 0, 0)',
             label: {
                 text: '',
-                style: {
+               style: {
                     color: '#606060'
                 }
             }
         }, { // Gentle breeze
             from: 30,
             to: 50,
-            color: 'rgba(200, 54, 54, 0.1)',
+            color: 'rgba(200, 54, 54, 10)',
             label: {
                 text: 'WARN',
                 style: {
-                    color: '#606060'
+                    color: '#FFFFFF'
                 }
             }
         }],
@@ -125,7 +131,7 @@ $('#temIntime').highcharts({
 $('#humIntime').highcharts({
     chart: {
         borderRadius: 6,
-        backgroundColor: 'rgba(0,0,0,0.1)',
+        backgroundColor: 'rgba(245,245,245,10)',
         type: 'line',
         events : {
                   load : function () {
@@ -152,11 +158,11 @@ $('#humIntime').highcharts({
         plotBands: [{ // Light air
             from: 50,
             to: 65,
-            color: 'rgba(68, 170, 213, 0.1)',
+            color: 'rgba(65,105,225,10)',
             label: {
                 text: 'SAFE',
                 style: {
-                    // color: '#606060'
+                    color: '#FFFFFF'
                 }
             }
         }, { // Light breeze
@@ -172,11 +178,11 @@ $('#humIntime').highcharts({
         }, { // Gentle breeze
             from: 76,
             to: 80,
-            color: 'rgba(200, 54, 54, 0.1)',
+            color: 'rgba(200, 54, 54, 10)',
             label: {
                 text: 'WARN',
                 style: {
-                    color: '#606060'
+                    color: '#FFFFFF'
                 }
             }
         }],

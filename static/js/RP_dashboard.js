@@ -776,7 +776,7 @@ function dashboard_Status_Rander(json){
                 <div class="text-center l-h-300">
                 <a href="#" class="btn btn-default text-red voipcall voipcall-default">緊急通話</a>
               </div>`;
-	if(randomTem > 27 ){
+	if(randomTem > 80 ){
 
 		$(".card").filter("[data-eid='Rasp06'][data-status!=0]").removeClass('card-header-normal').addClass("card-header-alert");
 		$(".card").filter("[data-eid='Rasp06'][data-status!=0]").find('blockquote').children().remove();
@@ -787,7 +787,7 @@ function dashboard_Status_Rander(json){
 		$(".card").filter("[data-eid='Rasp06'][data-status!=0]").find('div.pretector-text-tem').fadeIn();
 		$(".card").filter("[data-eid='Rasp06'][data-status!=0]").find('div.pretector-text-tem').next().append(warnDOM);
 		// $(".card").filter("[data-eid!='Rasp01'][data-status!=0]").find('span.pretector-text-hum').css("color", "red");
-	}else if(randomHum > 53){
+	}else if(randomHum > 80){
 		humFalg = true;
 		$(".card").filter("[data-eid='Rasp06'][data-status!=0]").find('div.pretector-text-hum').prev().text("");
 		$(".card").filter("[data-eid='Rasp06'][data-status!=0]").find('div.pretector-text-hum').prev().append('<img src="/static/img/icon-hum.png" class="icon-sensors">');
