@@ -555,8 +555,7 @@ function showEditEquips(){
     $('#EditEquipsModal').modal('show');
 }
 
-function backtopage(e){
-    e.preventDefault();
+function backtopage(){
     var uid = $("#containerdiv").data("uid");
     var url = "/dashboard?uid=" + uid;
     window.location.href = url;
