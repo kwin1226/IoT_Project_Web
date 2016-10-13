@@ -65,7 +65,7 @@ $('#temIntime').highcharts({
         plotBands: [{ // Light air
             from: 22,
             to: 25,
-            color: 'rgba(65,105,225,10)',
+            color: '#3CA33C',
             label: {
                 text: 'SAFE',
               style: {
@@ -158,7 +158,7 @@ $('#humIntime').highcharts({
         plotBands: [{ // Light air
             from: 50,
             to: 65,
-            color: 'rgba(65,105,225,10)',
+            color: '#3CA33C',
             label: {
                 text: 'SAFE',
                 style: {
@@ -213,7 +213,8 @@ $('#humIntime').highcharts({
     },
     series: [{
         name: '濕度',
-         data: intime_HUM}]
+        color:'',
+        data: intime_HUM}]
     // navigation: {
     //     menuItemStyle: {
     //         fontSize: '10px'

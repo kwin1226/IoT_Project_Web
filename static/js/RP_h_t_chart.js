@@ -17,6 +17,7 @@
         var array = [];
         var array2 = [];
         var array3 = [];//創造一陣列
+        var array_eve = [];
         var array4 = {};
         var array5 = [];//創造一陣列
         var array6 = {};
@@ -29,11 +30,13 @@
             var data = json[i].historyTem;//取出資料裡面的第一物件(第一個人)的hid
             var data2 = json[i].historyTime;
             var data3 = json[i].historyHum;
+            var data_eve = json[i].eveid;
             var object ={"data":data,"time":data2};//創造物件
-
+            // console.log("data_acc>>" + data_acc);
             array.push(data);
             array2.push(data3);
             array3.push(data2);
+            array_eve.push(data_eve);
 
             var timecut = []; 
             var timecut2 = []; 
@@ -43,7 +46,7 @@
 
             // console.log("Key is " + k + ", value is" + array9[i]);
         }
-        // console.log(JSON.stringify(array9));
+        // console.log("acc:" + JSON.stringify(array_eve[0]));
 
 
         array.forEach(function(x) { array4[x] = (array4[x] || 0)+1; });
@@ -128,7 +131,7 @@
         }
         console.log(JSON.stringify(array10));
 
-        h_t_main(array, array2, array3);
+        h_t_main(array, array2, array3, array_eve);
         t_pie(array5);
         h_pie(array7);
         usetime();
@@ -204,7 +207,10 @@
     });
 }
 
-    function h_t_main(array, array2, array3){
+    function h_t_main(array, array2, array3, array_eve){
+        // console.log("0:" + array2[0]);  
+
+
         $('#h_t_chart').highcharts({
             chart: {
                 borderRadius: 6,
@@ -271,8 +277,63 @@
                 //pointStart: Date.UTC(2006, 0, 1),
                 data: array2
                 //color: '#f7a35c'
-            }]
+            },{
+            type: 'scatter',
+            name: '跌倒事件',
+            color:'rgba(200, 54, 54, 10)',
+            data: [[]]
+            }],
+            tooltip: {
+                shared: false,
+                useHTML: true,
+                formatter: function() {
+                    var serie = this.series;
+                    var s ="";
+                    var symbol;
+                    switch(serie.index){
+                        case 0 :{
+                            symbol = '<img src="/static/img/icon-tmp-blue.png" height="20" width="20"/>';
+                            s = '<span style="color:' + serie.color + '"> ' + symbol + " " +serie.options.name + '</span>: <b style="color:'+ serie.color +'">' + this.y + '°C</b><br/>';
+                            s += '<img src="/static/img/icon-time-blue.png" height="20" width="20"/> '
+                            s += '<span style="color:' + serie.color + '"> 時間</span>: <b style="color:'+ serie.color +'">' + this.x; + '</b><br/>'
+                        break;
+                        }
+                        case 1 :{
+                            symbol = '<img src="/static/img/icon-hum-gray.png" height="20" width="20"/>';
+                            s = '<span style="color:' + serie.color + '"> ' + symbol + " " + serie.options.name + '</span>: <b style="color:'+ serie.color +'">' + this.y + '%</b><br/>';
+                            s += '<img src="/static/img/icon-time-gray.png" height="20" width="20"/> '
+                            s += '<span style="color:' + serie.color + '"> 時間</span>: <b style="color:'+ serie.color +'">' + this.x; + '</b><br/>'
+                        break;
+                        }
+                        case 2 :{
+                            symbol = '<img src="/static/img/icon-warn-red.png" height="20" width="20"/>';
+                            s = '<span style="color:' + serie.color + '"> ' + symbol + " " + serie.options.name + '</span>: <b style="color:'+ serie.color +'">已偵測 ' + '</b><br/>';
+                            s += '<img src="/static/img/icon-time-red.png" height="20" width="20"/> '
+                            s += '<span style="color:' + serie.color + '"> 時間</span>: <b style="color:'+ serie.color +'">' + this.x; + '</b><br/>'
+                        break;
+                        }
+                    }
+                    // $.each(serie.options.composition, function(name, value) {
+                    //     s += '<b>' + name + ':</b> ' + value + '<br>';
+                    // });
+                    return s;
+                }
+            }
         });
+        var chart = $('#h_t_chart').highcharts();
+        $.each(array_eve, function (i, v) {
+            if(v == 6){
+                chart.series[2].addPoint([i,90], false);
+                console.log("點:" + array3[i]);
+              // chart.series[2].data[i].update({
+              //     y:25,
+              //     marker:{
+              //       symbol: 'url(/static/img/icon-warn.png)'
+              //     }
+              // });
+            }
+        });
+        chart.redraw();
     }
 
     function t_pie(data){
