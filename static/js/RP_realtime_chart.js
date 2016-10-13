@@ -221,7 +221,7 @@ $('#humIntime').highcharts({
     // }
 });
  
-$(".highcharts-legend-item").hide();
+// $(".highcharts-legend-item").hide();
  });
 // $(".highcharts-xaxis-labels").hide();
 
