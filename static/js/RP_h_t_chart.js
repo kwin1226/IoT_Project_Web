@@ -292,23 +292,23 @@
                     var symbol;
                     switch(serie.index){
                         case 0 :{
-                            symbol = '<img src="/static/img/icon-tmp-blue.png" height="20" width="20"/>';
+                            symbol = '<img src="/static/img/icon-tmp-blue.png" height="15" width="15"/>';
                             s = '<span style="color:' + serie.color + '"> ' + symbol + " " +serie.options.name + '</span>: <b style="color:'+ serie.color +'">' + this.y + '°C</b><br/>';
-                            s += '<img src="/static/img/icon-time-blue.png" height="20" width="20"/> '
+                            s += '<img src="/static/img/icon-time-blue.png" height="15" width="15"/> '
                             s += '<span style="color:' + serie.color + '"> 時間</span>: <b style="color:'+ serie.color +'">' + this.x; + '</b><br/>'
                         break;
                         }
                         case 1 :{
-                            symbol = '<img src="/static/img/icon-hum-gray.png" height="20" width="20"/>';
+                            symbol = '<img src="/static/img/icon-hum-gray.png" height="15" width="15"/>';
                             s = '<span style="color:' + serie.color + '"> ' + symbol + " " + serie.options.name + '</span>: <b style="color:'+ serie.color +'">' + this.y + '%</b><br/>';
-                            s += '<img src="/static/img/icon-time-gray.png" height="20" width="20"/> '
+                            s += '<img src="/static/img/icon-time-gray.png" height="15" width="15"/> '
                             s += '<span style="color:' + serie.color + '"> 時間</span>: <b style="color:'+ serie.color +'">' + this.x; + '</b><br/>'
                         break;
                         }
                         case 2 :{
-                            symbol = '<img src="/static/img/icon-warn-red.png" height="20" width="20"/>';
+                            symbol = '<img src="/static/img/icon-warn-red.png" height="12" width="15"/>';
                             s = '<span style="color:' + serie.color + '"> ' + symbol + " " + serie.options.name + '</span>: <b style="color:'+ serie.color +'">跌倒事件 ' + '</b><br/>';
-                            s += '<img src="/static/img/icon-time-red.png" height="20" width="20"/> '
+                            s += '<img src="/static/img/icon-time-red.png" height="15" width="15"/> '
                             s += '<span style="color:' + serie.color + '"> 時間</span>: <b style="color:'+ serie.color +'">' + this.x; + '</b><br/>'
                         break;
                         }
