@@ -279,7 +279,7 @@
                 //color: '#f7a35c'
             },{
             type: 'scatter',
-            name: '跌倒事件',
+            name: '意外事件',
             color:'rgba(200, 54, 54, 10)',
             data: [[]]
             }],
@@ -307,7 +307,7 @@
                         }
                         case 2 :{
                             symbol = '<img src="/static/img/icon-warn-red.png" height="20" width="20"/>';
-                            s = '<span style="color:' + serie.color + '"> ' + symbol + " " + serie.options.name + '</span>: <b style="color:'+ serie.color +'">已偵測 ' + '</b><br/>';
+                            s = '<span style="color:' + serie.color + '"> ' + symbol + " " + serie.options.name + '</span>: <b style="color:'+ serie.color +'">跌倒事件 ' + '</b><br/>';
                             s += '<img src="/static/img/icon-time-red.png" height="20" width="20"/> '
                             s += '<span style="color:' + serie.color + '"> 時間</span>: <b style="color:'+ serie.color +'">' + this.x; + '</b><br/>'
                         break;
