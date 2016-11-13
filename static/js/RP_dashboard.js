@@ -701,6 +701,7 @@ function voipCall(){
       e.stopPropagation();
       $(this).hide();
       $("#hangupCall").fadeIn();
+      register();
       makeCall();
     });
 

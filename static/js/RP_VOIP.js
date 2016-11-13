@@ -60,7 +60,7 @@ $(function(){
           case 'started':
           {
             // successfully started the stack.
-            register();
+            // register();
             break;
           }
           case 'stopping': case 'stopped': case 'failed_to_start': case 'failed_to_stop':
